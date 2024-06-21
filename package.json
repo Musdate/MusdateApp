@@ -6,7 +6,11 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "del:docs": "del /s /q docs\\*",
+    "copy:docs": "xcopy dist\\musdate-app\\browser docs /s /e",
+    "copy:file": "xcopy dist\\musdate-app\\3rdpartylicenses.txt docs",
+    "build:docs": "npm run build && npm run del:docs && npm run copy:docs && npm run copy:file"
   },
   "private": true,
   "dependencies": {
