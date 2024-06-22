@@ -7,10 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "del:docs": "del /s /q docs\\*",
-    "copy:docs": "xcopy dist\\musdate-app\\browser docs /s /e",
-    "copy:file": "xcopy dist\\musdate-app\\3rdpartylicenses.txt docs",
-    "build:docs": "npm run build && npm run del:docs && npm run copy:docs && npm run copy:file"
+    "del:docs": "del-cli docs",
+    "copy:dist": "copyfiles dist/musdate-app/browser/* ./docs -f",
+    "copy:file": "copyfiles dist/musdate-app/*.txt ./docs -f",
+    "build:docs": "npm run build && npm run del:docs && npm run copy:dist && npm run copy:file"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +31,8 @@
     "@angular/cli": "^17.3.8",
     "@angular/compiler-cli": "^17.3.0",
     "@types/jasmine": "~5.1.0",
+    "copyfiles": "^2.4.1",
+    "del-cli": "^5.1.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
