@@ -1,7 +1,7 @@
 @use '../../../base/variables' as v;
 
 .layout {
-    width: 25rem;
+    width: 27.5rem;
 
     input {
         margin: 0 0 5rem 0;
@@ -11,6 +11,7 @@
         background: v.$white;
         border: none;
         border-radius: 1rem;
+        color: v.$darkGrey;
 
         &::placeholder {
             color: v.$lightGrey;
