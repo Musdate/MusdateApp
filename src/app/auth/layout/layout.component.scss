@@ -1,0 +1,28 @@
+@use '../../../base/variables' as v;
+
+.background {
+    background: linear-gradient(90deg, rgba(255,200,75,0.50) 15%, rgba(200,100,225,0.50) 85%);
+    min-height: 100vh;
+    min-height: 100svh;
+}
+
+.logo {
+    width: 10rem;
+}
+
+.layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 7.5rem 0;
+    color: v.$white;
+
+    h1 {
+        margin: 1rem;
+        font-weight: 700;
+    }
+
+    h3 {
+        margin: 0 0 5rem 0;
+        font-weight: 400;
+    }
+}

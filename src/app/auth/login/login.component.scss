@@ -1,0 +1,53 @@
+@use '../../../base/variables' as v;
+
+.layout {
+    width: 25rem;
+
+    input {
+        margin: 0 0 5rem 0;
+        padding: 0 1.5rem;
+        width: 100%;
+        height: 4.5rem;
+        background: v.$white;
+        border: none;
+        border-radius: 1rem;
+
+        &::placeholder {
+            color: v.$lightGrey;
+            font-style: italic;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+
+    button {
+        width: 100%;
+        height: 5rem;
+        margin: 0 0 5rem 0;
+        font-weight: 700;
+        background-color: v.$third;
+        border: none;
+        outline: none;
+        color: v.$white;
+        border-radius: 1rem;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #74d2fa;
+        }
+    }
+
+    span {
+        display: block;
+        text-align: center;
+        margin: 0 0 2.5rem 0;
+        cursor: pointer;
+
+        &:hover {
+            color: v.$third;
+        }
+    }
+}
