@@ -12,6 +12,7 @@ html {
 body {
     font-family: v.$font;
     font-size: 1.6rem;
+    background-color: #E3E6E6;
 }
 
 p {
@@ -49,8 +50,8 @@ h3 {
 
 .container {
     display: flex;
-    width: 95%;
-    max-width: 120rem;
+    width: 100%;
+    max-width: 150rem;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
