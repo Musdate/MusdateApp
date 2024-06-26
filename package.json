@@ -12,7 +12,7 @@
     "copy:dist": "copyfiles dist/musdate-app/browser/* ./docs -f",
     "copy:file": "copyfiles dist/musdate-app/*.txt ./docs -f",
     "copy:assets": "copyfiles dist/musdate-app/browser/assets/* ./docs/assets -f",
-    "build:docs": "npm run build && npm run del:docs && npm run copy:dist && npm run copy:file && npm run copy:assets"
+    "build:docs": "npm run build:docs && npm run del:docs && npm run copy:dist && npm run copy:file && npm run copy:assets"
   },
   "private": true,
   "dependencies": {
