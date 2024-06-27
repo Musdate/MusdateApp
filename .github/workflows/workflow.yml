@@ -16,7 +16,7 @@ jobs:
       run: npm ci
 
     - name: Create environments.ts
-      run: echo "${{ secrets.ENV_FILE_CONTENT }}" > src/environments/environment.ts
+      run: echo "${{ secrets.ENV_FILE_CONTENT }}" > src/environments/environments.ts
 
     - name: Build Website
       run: npm run build:docs
