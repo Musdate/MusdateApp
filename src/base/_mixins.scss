@@ -19,6 +19,7 @@
     }
 }
 
+// Elements
 @mixin grid($columns, $spacing ) {
     display: grid;
     gap: $spacing;
