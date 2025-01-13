@@ -25,6 +25,7 @@ export class AuthService {
 
   constructor() {
     this.checkAuthStatus().subscribe();
+    console.log(environment);
   }
 
   private setAuthentication(user: User, token: string): boolean {
