@@ -1,0 +1,15 @@
+<div class="navbar">
+    <div class="left-navbar">
+        <a [routerLink]="['/landing']">
+            <img src="../../../assets/LogoMemories_100x100.png" alt="Logo Memories" width="50" height="50">
+        </a>
+        <a [routerLink]="['recipes']" routerLinkActive="active-link">Recetas</a>
+        <div>Mangas</div>
+        <div>Peliculas</div>
+        <a [routerLink]="['walks']" routerLinkActive="active-link">Paseos</a>
+    </div>
+    <div class="right-navbar">
+        <div> {{userName}} </div>
+        <div onKeyPress (click)="onLogout()"> Cerrar Sesion </div>
+    </div>
+</div>

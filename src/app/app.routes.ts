@@ -10,7 +10,7 @@ export const routes: Routes = [
     {
         path: 'landing',
         canActivate: [ isAuthenticatedGuard ],
-        loadComponent: () => import('./pages/landing/landing.component').then(m => m.LandingComponent)
+        loadChildren: () => import('./pages/landing/landing.routes').then(m => m.LANDING_ROUTES)
     },
     {
         path: '**',

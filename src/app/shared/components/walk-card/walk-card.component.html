@@ -1,0 +1,23 @@
+<div onKeyPress class="card" (click)="toggleData()">
+    <div class="name-pet">
+        <div>{{ pet.name }}</div>
+        <div class="delete-btn" (click)="deletePet( pet._id, pet.name)"> X </div>
+    </div>
+    <div>{{ pet.type }}</div>
+    <div>{{ pet.comment }}</div>
+    
+</div>
+
+@if ( cardExpanded ) {
+    <div class="pet-info">
+        <div>
+            01-02-2025
+        </div>
+        <div>
+            01-02-2025
+        </div>
+        <div>
+            Total: 28.000
+        </div>
+    </div>
+}

@@ -1,0 +1,47 @@
+<div class="container card-container">
+
+    <div style="margin: 20px 0 20px 0">Agregar Mascota</div>
+
+    <form [formGroup]="petForm" (ngSubmit)="onSave()" autocomplete="off">
+    
+        <div>
+            <label for="name">Nombre: </label>
+            <div>
+                <input id="name" type="text" formControlName="name" placeholder="Nombre Mascota">
+            </div>
+        </div>
+
+        <div>
+            <label for="type">Tipo: </label>
+            <div>
+                <input id="type" type="text" formControlName="type" placeholder="Perro/Gato/Pato">
+            </div>
+        </div>
+
+        <div>
+            <label for="comment">Comentario: </label>
+            <div>
+                <input id="comment" type="text" formControlName="comment" placeholder="Comentario">
+            </div>
+        </div>
+
+        <input class="btn btn-form" type="submit" value="Guardar">
+    
+    </form>
+
+    
+    @if ( allPets.length === 0 ) {
+        <div style="margin: 20px 0 20px 0">Aun no tienes mascotas para pasear</div>
+        Agrega una !!
+    }
+    @else {
+
+        @for ( pet of allPets; track pet.name ) {
+    
+            <app-walk-card [pet]="pet" (petDeleted)="petDeleted()"></app-walk-card>
+    
+        }
+
+    }
+
+</div>

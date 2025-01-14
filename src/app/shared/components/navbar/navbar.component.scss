@@ -1,0 +1,39 @@
+@use '../../../../base/variables' as v;
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 v.$separation;
+    height: 7rem;
+    width: 100%;
+    color: v.$white;
+    font-weight: 500;
+    background: linear-gradient(90deg,
+    rgba(255,200,075,0.50) 15%,
+    rgba(200,100,225,0.50) 85%);
+}
+
+.left-navbar,
+.right-navbar {
+    display: flex;
+    align-items: center;
+    
+    & > * {
+        cursor: pointer;
+        margin: 0 v.$separation;
+    }
+
+    a {
+        color: v.$white;
+
+        &:hover {
+            color: v.$third;
+        }
+    }
+}
+
+.active-link {
+    color: v.$third;
+    font-weight: bold;
+}
