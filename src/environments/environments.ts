@@ -1,4 +1,4 @@
 export const environment = {
-    production: '',
-    baseUrl: ''
+    production: 'false',
+    baseUrl: 'https://musdateappbackend.onrender.com'
 }
