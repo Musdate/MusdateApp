@@ -59,10 +59,6 @@
         div {
             margin: v.$separation;
         }
-
-        &:hover {
-            color: v.$third;
-        }
     }
 
     @include m.tablet {
@@ -75,9 +71,13 @@
 
     @include m.tablet {
         display: flex;
+        color: v.$white;
+
+        &:hover {
+            color: v.$third;
+        }
     }
 }
-
 
 .left-navbar,
 .right-navbar {
@@ -87,14 +87,6 @@
     & > * {
         cursor: pointer;
         margin: 0px v.$separation;
-    }
-
-    a {
-        color: v.$white;
-
-        &:hover {
-            color: v.$third;
-        }
     }
 }
 
@@ -126,10 +118,6 @@
     display: flex;
     cursor: pointer;
 
-    &:hover {
-        color: v.$third;
-    }
-
     @include m.tablet {
         display: none;
     }
@@ -138,8 +126,15 @@
 .logoItem {
     display: flex;
     align-items: center;
+    color: v.$white;
 
     div {
         margin: 0px v.$separation;
+
+        @include m.tablet {
+            display: none;
+        }
     }
+
+
 }
