@@ -28,4 +28,9 @@ export class WalksService {
     const url = `${ this.baseUrl }/walks/${ id }`;
     return this.http.delete<Pet>( url );
   }
+
+  addWalk( id: string, walk: string ) {
+    const url = `${ this.baseUrl }/walks/${ id }/addWalk`;
+    return this.http.patch<Pet>( url, { walk } );
+  }
 }

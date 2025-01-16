@@ -29,14 +29,13 @@
     
     </form>
 
-    
     @if ( allPets.length === 0 ) {
         <div style="margin: 20px 0 20px 0">Aun no tienes mascotas para pasear</div>
         Agrega una !!
     }
     @else {
 
-        @for ( pet of allPets; track pet.name ) {
+        @for ( pet of allPets; track pet._id ) {
     
             <app-walk-card [pet]="pet" (petDeleted)="petDeleted()"></app-walk-card>
     

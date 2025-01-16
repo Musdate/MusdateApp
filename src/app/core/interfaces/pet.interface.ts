@@ -3,4 +3,5 @@ export interface Pet {
     name    : string;
     type    : string;
     comment : string;
+    walks   : string[];
 }

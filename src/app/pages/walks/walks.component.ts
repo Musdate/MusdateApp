@@ -22,7 +22,8 @@ export class WalksComponent implements OnInit {
   public petForm: FormGroup = this.fb.group({
     name: ['', [], []],
     type: ['', [], []],
-    comment: ['', [], []]
+    comment: ['', [], []],
+    walks: [[''], [], []]
   });
 
   constructor() {
