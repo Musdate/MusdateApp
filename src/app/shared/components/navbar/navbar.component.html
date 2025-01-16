@@ -1,15 +1,67 @@
-<div class="navbar">
+<nav class="navbar" aria-label="Barra de navegación.">
+
     <div class="left-navbar">
-        <a [routerLink]="['/landing']">
+        <a [routerLink]="['/landing']" class="logoItem">
             <img src="../../../assets/LogoMemories_100x100.png" alt="Logo Memories" width="50" height="50">
+            <div> Memories </div>
         </a>
-        <a [routerLink]="['recipes']" routerLinkActive="active-link">Recetas</a>
-        <div>Mangas</div>
-        <div>Peliculas</div>
-        <a [routerLink]="['walks']" routerLinkActive="active-link">Paseos</a>
+        <a [routerLink]="['recipes']" routerLinkActive="active-link" class="navItem">Recetas</a>
+        <a class="navItem">Mangas</a>
+        <a class="navItem">Peliculas</a>
+        <a [routerLink]="['walks']" routerLinkActive="active-link" class="navItem">Paseos</a>
     </div>
+
     <div class="right-navbar">
-        <div> {{userName}} </div>
-        <div onKeyPress (click)="onLogout()"> Cerrar Sesion </div>
+        <div class="navItem"> {{userName}} </div>
+        <app-svg onKeyPress [iconName]="'logout'" (click)="onLogout()" class="navItem"></app-svg>
     </div>
-</div>
+
+    <span onKeyPress (click)="toogleSidebar()" class="menuLogo">
+        <app-svg [iconName]="'menu'"></app-svg>
+    </span>
+
+</nav>
+
+@if ( showSidebar ) {
+
+    <div onKeyPress class="overlay" (click)="toogleSidebar()"></div>
+
+    <nav class="sidebar" aria-label="Menu lateral.">
+
+        <span onKeyPress (click)="toogleSidebar()" class="closeSidebar">
+            <app-svg [iconName]="'close'"></app-svg>
+        </span>
+
+        <a [routerLink]="['recipes']" routerLinkActive="active-link" class="navItem">
+            <app-svg [iconName]="'recipes'"></app-svg>
+            <div> Recetas </div>
+        </a>
+
+        <a class="navItem">
+            <app-svg [iconName]="'mangas'"></app-svg>
+            <div> Mangas </div>
+        </a>
+
+        <a class="navItem">
+            <app-svg [iconName]="'movies'"></app-svg>
+            <div>  Películas </div>
+        </a>
+
+        <a [routerLink]="['walks']" routerLinkActive="active-link" class="navItem">
+            <app-svg [iconName]="'walks'"></app-svg>
+            <div>  Paseos </div>
+        </a>
+
+        <a [routerLink]="['walks']" routerLinkActive="active-link" class="navItem config">
+            <app-svg [iconName]="'settings'"></app-svg>
+            <div> Configuración </div>
+        </a>
+
+        <span onKeyPress (click)="onLogout()">
+            <app-svg [iconName]="'logout'"></app-svg>
+            <div> Cerrar Sesión </div>
+        </span>
+
+    </nav>
+
+}

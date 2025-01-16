@@ -60,3 +60,19 @@ h3 {
 .center {
     justify-content: center;
 }
+
+
+// SWALFIRE 2 MODAL
+.swal2-modal {
+
+    .swal2-html-container {
+        display: flex !important;
+        flex-direction: column;
+        align-items: flex-start;
+
+        input {
+            width: 100%;
+            margin: 0.2rem 0px 0.5rem 0px;
+        }
+    }
+}

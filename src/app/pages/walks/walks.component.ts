@@ -21,7 +21,6 @@ export class WalksComponent implements OnInit {
 
   public petForm: FormGroup = this.fb.group({
     name: ['', [], []],
-    type: ['', [], []],
     comment: ['', [], []],
     walks: [[''], [], []]
   });
@@ -38,8 +37,8 @@ export class WalksComponent implements OnInit {
     this.walkService.findAllPets().subscribe( pets => this.allPets = pets );
   }
 
-  onSave(): void {
-    this.walkService.onSave(this.petForm.value).subscribe({
+  onSave( formValue: Pet ): void {
+    this.walkService.onSave( formValue ).subscribe({
       next: () => {
         Swal.fire({
           position: 'top-end',
@@ -55,6 +54,11 @@ export class WalksComponent implements OnInit {
         });
       },
       complete: () => {
+        this.petForm.reset({
+          name: '',
+          comment: '',
+          walks: ['']
+        });
         this.loadPets();
       },
       error: (message) => {
@@ -69,5 +73,28 @@ export class WalksComponent implements OnInit {
 
   petDeleted(): void {
     this.loadPets();
+  }
+
+  async addPet() {
+    const { value: formValues } = await Swal.fire({
+      title: "Agregar Mascota",
+      html: `
+        <label for="swal-petName">Nombre: </label>
+        <input id="swal-petName" type="text" placeholder="Nombre Mascota">
+        <label for="swal-petComment">Comentario: </label>
+        <input id="swal-petComment" type="text" placeholder="Comentario">
+      `,
+      focusConfirm: false,
+      preConfirm: () => {
+        return {
+          name: (<HTMLInputElement>document.getElementById("swal-petName")).value,
+          comment: (<HTMLInputElement>document.getElementById("swal-petComment")).value,
+          walks: ['']
+        };
+      }
+    });
+    if (formValues) {
+      this.onSave(formValues);
+    }
   }
 }
