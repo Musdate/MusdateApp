@@ -1,22 +1,22 @@
 <nav class="navbar" aria-label="Barra de navegación.">
 
     <div class="left-navbar">
-        <a [routerLink]="['/landing']" class="logoItem">
+        <a [routerLink]="['/landing']" class="logo-item">
             <img src="../../../assets/LogoMemories_100x100.png" alt="Logo Memories" width="50" height="50">
             <div> Memories </div>
         </a>
-        <a [routerLink]="['recipes']" routerLinkActive="active-link" class="navItem">Recetas</a>
-        <a class="navItem">Mangas</a>
-        <a class="navItem">Peliculas</a>
-        <a [routerLink]="['walks']" routerLinkActive="active-link" class="navItem">Paseos</a>
+        <a [routerLink]="['recipes']" routerLinkActive="active-link" class="nav-item">Recetas</a>
+        <a class="nav-item">Mangas</a>
+        <a class="nav-item">Peliculas</a>
+        <a [routerLink]="['walks']" routerLinkActive="active-link" class="nav-item">Paseos</a>
     </div>
 
     <div class="right-navbar">
-        <div class="navItem"> {{userName}} </div>
-        <app-svg onKeyPress [iconName]="'logout'" (click)="onLogout()" class="navItem"></app-svg>
+        <div class="nav-item"> {{userName}} </div>
+        <app-svg onKeyPress [iconName]="'logout'" (click)="onLogout()" class="nav-item"></app-svg>
     </div>
 
-    <span onKeyPress (click)="toogleSidebar()" class="menuLogo">
+    <span onKeyPress (click)="toogleSidebar()" class="menu-logo">
         <app-svg [iconName]="'menu'"></app-svg>
     </span>
 
@@ -28,7 +28,7 @@
 
     <nav class="sidebar" aria-label="Menu lateral.">
 
-        <span onKeyPress (click)="toogleSidebar()" class="closeSidebar">
+        <span onKeyPress (click)="toogleSidebar()" class="close-sidebar">
             <app-svg [iconName]="'close'"></app-svg>
         </span>
 

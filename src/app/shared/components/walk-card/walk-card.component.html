@@ -1,32 +1,41 @@
-<div onKeyPress class="card" (click)="toggleData()">
-    <div class="name-pet">
-        <div>{{ pet.name }}</div>
-        <div onKeyPress class="delete-btn" (click)="deletePet( pet._id, pet.name )"> X </div>
-    </div>
-    <div>{{ pet.comment }}</div>
-    
-</div>
+<div class="walk-card-container">
 
-@if ( cardExpanded ) {
-    <div class="pet-info">
-        <div>
-            <button>
-                Seleccionar  Todo
-            </button>
-            <button (click)="walkPet()">
-                Merequetengue!
-            </button>
-            <button>
-                Pagado!
-            </button>
+    <div onKeyPress class="card" (click)="toggleData()">
+
+        <div class="name-pet">
+            <div> {{ pet.name }} </div>
+            <div onKeyPress class="delete-btn" (click)="deletePet( pet._id, pet.name )">
+                <app-svg [iconName]="'close'"></app-svg>
+            </div>
         </div>
 
-        @for ( walk of pet.walks; track pet._id ) {
-            <div style="display: flex;">
-
-                <input type="checkbox" /><div> {{ walk }} </div>
-            </div>
-        }
+        <div class="pet-comment"> {{ pet.comment }} </div>
 
     </div>
-}
+
+    @if ( cardExpanded ) {
+        <div class="pet-info">
+            <div class="btn-container">
+                <!-- <button>
+                    Seleccionar  Todo
+                </button> -->
+                <button (click)="walkPet()">
+                    Merequetengue!
+                </button>
+                <!-- <button>
+                    Pagado!
+                </button> -->
+            </div>
+
+            @for ( walk of pet.walks; track pet._id ) {
+                <div style="display: flex;">
+
+                    <!-- <input type="checkbox" /> -->
+                    <div> {{ walk }} </div>
+                </div>
+            }
+
+        </div>
+    }
+
+</div>

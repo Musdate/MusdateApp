@@ -20,6 +20,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 v.$separation;
+    margin: 0px 0px 2.5rem 0px;
     height: 7rem;
     width: 100%;
     color: v.$white;
@@ -66,7 +67,7 @@
     }
 }
 
-.navItem {
+.nav-item {
     display: none;
 
     @include m.tablet {
@@ -109,12 +110,12 @@
     }
 }
 
-.closeSidebar {
+.close-sidebar {
     justify-content: flex-end;
     padding: v.$separation;
 }
 
-.menuLogo {
+.menu-logo {
     display: flex;
     cursor: pointer;
 
@@ -123,7 +124,7 @@
     }
 }
 
-.logoItem {
+.logo-item {
     display: flex;
     align-items: center;
     color: v.$white;
@@ -135,6 +136,4 @@
             display: none;
         }
     }
-
-
 }

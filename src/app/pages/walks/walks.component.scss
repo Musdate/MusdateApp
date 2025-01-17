@@ -1,3 +1,16 @@
+@use '../../../base/variables' as v;
+
 .card-container {
     flex-direction: column;
+}
+
+.add-btn {
+    all: unset;
+    border: 1px solid v.$midGrey;
+    border-radius: 2rem;
+    color: v.$darkGrey;
+    padding: 1rem;
+    background-color: v.$white;
+    cursor: pointer;
+    box-shadow: 10px 10px 10px -10px rgba(0, 0, 0, 0.2);
 }

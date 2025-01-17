@@ -2,11 +2,12 @@ import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Pet } from 'src/app/core/interfaces/pet.interface';
 import { WalksService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
+import { SvgComponent } from '../Icons/svg.component';
 
 @Component({
   selector: 'app-walk-card',
   standalone: true,
-  imports: [],
+  imports: [ SvgComponent ],
   templateUrl: './walk-card.component.html',
   styleUrl: './walk-card.component.scss'
 })
