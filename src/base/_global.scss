@@ -76,3 +76,35 @@ h3 {
         }
     }
 }
+
+// BUTTONS
+
+.btn {
+    all: unset;
+    display: flex;
+    align-items: center;
+    border-radius: 2rem;
+    color: v.$darkGrey;
+    padding: 1rem;
+    background-color: v.$white;
+    cursor: pointer;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
+
+    div {
+        margin: 0px 0.5rem;
+    }
+}
+
+.red-btn {
+
+    &:hover {
+        color: rgb(150, 50, 50);
+    }
+}
+
+.green-btn {
+
+    &:hover {
+        color: rgb(80, 150, 50);
+    }
+}

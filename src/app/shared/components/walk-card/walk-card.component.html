@@ -4,9 +4,6 @@
 
         <div class="name-pet">
             <div> {{ pet.name }} </div>
-            <div onKeyPress class="delete-btn" (click)="deletePet( pet._id, pet.name )">
-                <app-svg [iconName]="'close'"></app-svg>
-            </div>
         </div>
 
         <div class="pet-comment"> {{ pet.comment }} </div>
@@ -19,12 +16,17 @@
                 <!-- <button>
                     Seleccionar  Todo
                 </button> -->
-                <button (click)="walkPet()">
-                    Merequetengue!
+                <button (click)="walkPet()" class="btn green-btn">
+                    <div> Merequetengue! </div>
+                    <app-svg [iconName]="'check'"></app-svg>
                 </button>
                 <!-- <button>
                     Pagado!
                 </button> -->
+                <button onKeyPress class="btn red-btn" (click)="deletePet( pet._id, pet.name )">
+                    <div> Eliminar </div>
+                    <app-svg [iconName]="'delete'"></app-svg>
+                </button>
             </div>
 
             @for ( walk of pet.walks; track pet._id ) {

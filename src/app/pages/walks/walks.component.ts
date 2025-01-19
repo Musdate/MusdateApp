@@ -2,13 +2,18 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Pet } from 'src/app/core/interfaces/pet.interface';
 import { WalksService } from 'src/app/core/services';
+import { SvgComponent } from 'src/app/shared/components/Icons/svg.component';
 import { WalkCardComponent } from 'src/app/shared/components/walk-card/walk-card.component';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-walks',
   standalone: true,
-  imports: [ WalkCardComponent, ReactiveFormsModule ],
+  imports: [
+    WalkCardComponent,
+    ReactiveFormsModule,
+    SvgComponent
+   ],
   templateUrl: './walks.component.html',
   styleUrl: './walks.component.scss'
 })

@@ -1,6 +1,9 @@
 <div class="container card-container">
 
-    <button (click)="addPet()" class="add-btn">Agregar Mascota</button>
+    <button (click)="addPet()" class="btn green-btn">
+        <div> Agregar Mascota </div>
+        <app-svg [iconName]="'plus'"></app-svg>
+    </button>
 
     @if ( allPets.length === 0 ) {
         <div style="margin: 20px 0 20px 0">Aun no tienes mascotas para pasear</div>
