@@ -1,9 +1,16 @@
 <div class="container card-container">
 
-    <button (click)="addPet()" class="btn green-btn">
-        <div> Agregar Mascota </div>
-        <app-svg [iconName]="'plus'"></app-svg>
-    </button>
+    <div class="buttons-container">
+        <button (click)="getWalksPrecios()" class="btn green-btn">
+            <div> Precios </div>
+            <icon-edit></icon-edit>
+        </button>
+
+        <button (click)="addPet()" class="btn green-btn">
+            <div> Agregar Mascota </div>
+            <icon-plus></icon-plus>
+        </button>
+    </div>
 
     @if ( allPets.length === 0 ) {
         <div style="margin: 20px 0 20px 0">Aun no tienes mascotas para pasear</div>
@@ -12,9 +19,9 @@
     @else {
 
         @for ( pet of allPets; track pet._id ) {
-    
+
             <app-walk-card [pet]="pet" (petDeleted)="petDeleted()"></app-walk-card>
-    
+
         }
 
     }

@@ -3,3 +3,10 @@
 .card-container {
     flex-direction: column;
 }
+
+.buttons-container {
+    display: flex;
+    gap: v.$separation;
+
+
+}

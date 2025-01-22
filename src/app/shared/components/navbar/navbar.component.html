@@ -13,11 +13,11 @@
 
     <div class="right-navbar">
         <div class="nav-item"> {{userName}} </div>
-        <app-svg onKeyPress [iconName]="'logout'" (click)="onLogout()" class="nav-item"></app-svg>
+        <icon-logout onKeyPress (click)="onLogout()" class="nav-item"></icon-logout>
     </div>
 
     <span onKeyPress (click)="toogleSidebar()" class="menu-logo">
-        <app-svg [iconName]="'menu'"></app-svg>
+        <icon-menu></icon-menu>
     </span>
 
 </nav>
@@ -29,36 +29,36 @@
     <nav class="sidebar" aria-label="Menu lateral.">
 
         <span onKeyPress (click)="toogleSidebar()" class="close-sidebar">
-            <app-svg [iconName]="'close'"></app-svg>
+            <icon-close></icon-close>
         </span>
 
         <a [routerLink]="['recipes']" routerLinkActive="active-link" (click)="toogleSidebar()">
-            <app-svg [iconName]="'recipes'"></app-svg>
+            <icon-recipes></icon-recipes>
             <div> Recetas </div>
         </a>
 
         <a>
-            <app-svg [iconName]="'mangas'"></app-svg>
+            <icon-mangas></icon-mangas>
             <div> Mangas </div>
         </a>
 
         <a>
-            <app-svg [iconName]="'movies'"></app-svg>
+            <icon-movies></icon-movies>
             <div>  Películas </div>
         </a>
 
         <a [routerLink]="['walks']" routerLinkActive="active-link" (click)="toogleSidebar()">
-            <app-svg [iconName]="'walks'"></app-svg>
+            <icon-walks></icon-walks>
             <div>  Paseos </div>
         </a>
 
         <a [routerLink]="['walks']" routerLinkActive="active-link" class="config" (click)="toogleSidebar()">
-            <app-svg [iconName]="'settings'"></app-svg>
+            <icon-settings></icon-settings>
             <div> Configuración </div>
         </a>
 
         <span onKeyPress (click)="onLogout(); toogleSidebar()">
-            <app-svg [iconName]="'logout'"></app-svg>
+            <icon-logout></icon-logout>
             <div> Cerrar Sesión </div>
         </span>
 

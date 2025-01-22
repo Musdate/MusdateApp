@@ -61,6 +61,12 @@ h3 {
     justify-content: center;
 }
 
+.iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 // SWALFIRE 2 MODAL
 .swal2-modal {
@@ -77,8 +83,8 @@ h3 {
     }
 }
 
-// BUTTONS
 
+// BUTTONS
 .btn {
     all: unset;
     display: flex;

@@ -1,12 +1,32 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/core/services';
-import { SvgComponent } from '../Icons/svg.component';
+
+import {
+  LogoutIconComponent,
+  MenuIconComponent,
+  CloseIconComponent,
+  MangasIconComponent,
+  RecipesIconComponent,
+  MoviesIconComponent,
+  WalksIconComponent,
+  SettingsIconComponent
+} from '../Icons';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ RouterLink, SvgComponent ],
+  imports: [
+    RouterLink,
+    LogoutIconComponent,
+    MenuIconComponent,
+    CloseIconComponent,
+    RecipesIconComponent,
+    MangasIconComponent,
+    MoviesIconComponent,
+    WalksIconComponent,
+    SettingsIconComponent
+   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
