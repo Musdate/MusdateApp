@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from 'src/app/core/services';
@@ -16,19 +16,38 @@ import 'animate.css';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   private readonly fb          = inject( FormBuilder);
   private readonly authService = inject( AuthService);
   private readonly router      = inject( Router );
 
   public loginForm: FormGroup = this.fb.group({
-    email:    ['admin@gmail.com', [ Validators.required, Validators.email ]],
-    password: ['123456', [ Validators.required, Validators.minLength(6) ]]
+    email:      ['admin@gmail.com', [ Validators.required, Validators.email ]],
+    password:   ['123456', [ Validators.required, Validators.minLength(6) ]],
+    rememberMe: [ false ]
   });
 
-  login() {
-    const { email, password } = this.loginForm.value;
+  ngOnInit(): void {
+    this.loadRememberedUser();
+  }
+
+  private loadRememberedUser() {
+    const savedUser = localStorage.getItem('rememberedUser');
+
+    if ( savedUser ) {
+      this.loginForm.patchValue({ email: savedUser, password: '', rememberMe: true });
+    }
+  }
+
+  public login() {
+    const { email, password, rememberMe } = this.loginForm.value;
+
+    if ( rememberMe ) {
+      localStorage.setItem('rememberedUser', email);
+    } else {
+      localStorage.removeItem('rememberedUser');
+    }
 
     this.authService.login( email, password )
       .subscribe({
