@@ -15,13 +15,13 @@ export class WalksService {
 
   constructor() {}
 
-  onSave( body: Pet ) {
-    const url = `${ this.baseUrl }/walks/addPet`;
+  onSavePet( userId: string, body: Pet ) {
+    const url = `${ this.baseUrl }/walks/addPet/${ userId }`;
     return this.http.post<Pet>( url, body );
   }
 
-  findAllPets(): Observable<Pet[]> {
-    const url = `${ this.baseUrl }/walks/getAllPets`;
+  findAllPets( userId: string ): Observable<Pet[]> {
+    const url = `${ this.baseUrl }/walks/getAllPets/${ userId }`;
     return this.http.get<Pet[]>( url );
   }
 

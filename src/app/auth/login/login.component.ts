@@ -18,12 +18,12 @@ import 'animate.css';
 })
 export class LoginComponent {
 
-  private fb          = inject( FormBuilder);
-  private authService = inject( AuthService);
-  private router      = inject( Router );
+  private readonly fb          = inject( FormBuilder);
+  private readonly authService = inject( AuthService);
+  private readonly router      = inject( Router );
 
   public loginForm: FormGroup = this.fb.group({
-    email:    ['bastiantroncoso97@gmail.com', [ Validators.required, Validators.email ]],
+    email:    ['admin@gmail.com', [ Validators.required, Validators.email ]],
     password: ['123456', [ Validators.required, Validators.minLength(6) ]]
   });
 
@@ -47,8 +47,6 @@ export class LoginComponent {
             },
           });
         }
-      })
-
+      });
   }
-
 }

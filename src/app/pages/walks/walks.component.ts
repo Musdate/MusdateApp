@@ -45,7 +45,7 @@ export class WalksComponent implements OnInit {
   }
 
   loadPets() {
-    this.walkService.findAllPets().subscribe( pets => this.allPets = pets );
+    this.walkService.findAllPets( this.authService.currentUser()!._id ).subscribe( pets => this.allPets = pets );
   }
 
   loadWalksPrice() {
@@ -53,7 +53,7 @@ export class WalksComponent implements OnInit {
   }
 
   onSavePet( formValue: Pet ): void {
-    this.walkService.onSave( formValue ).subscribe({
+    this.walkService.onSavePet( this.authService.currentUser()!._id, formValue ).subscribe({
       next: () => {
         Swal.fire({
           position: 'top-end',
