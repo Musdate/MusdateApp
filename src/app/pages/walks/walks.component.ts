@@ -99,6 +99,7 @@ export class WalksComponent implements OnInit {
       },
       complete: () => {
         this.loadWalksPrice();
+        this.loadPets();
       },
       error: (message) => {
         Swal.fire({
