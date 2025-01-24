@@ -29,13 +29,25 @@
                 </button>
             </div>
 
-            @for ( walk of pet.walks; track pet._id ) {
-                <div style="display: flex;">
+            <div class="date-container">
 
-                    <!-- <input type="checkbox" /> -->
+                @for ( walk of pet.walks; track pet._id ) {
+
+                    @if ( isNewWeek( walk ) ) {
+
+                        <div class="division-line"></div>
+
+                    }
+
                     <div> {{ walk }} </div>
-                </div>
-            }
+                }
+
+            </div>
+
+            <div class="total-container">
+                <div> Total: </div>
+                <div> {{ pet.totalPrice | currency }} </div>
+            </div>
 
         </div>
     }

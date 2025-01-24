@@ -1,6 +1,7 @@
 export interface Pet {
-    _id     : string;
-    name    : string;
-    comment : string;
-    walks   : string[];
+    _id        : string;
+    name       : string;
+    comment    : string;
+    walks      : string[];
+    totalPrice : number;
 }

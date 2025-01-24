@@ -3,33 +3,38 @@ import { Pet } from 'src/app/core/interfaces/pet.interface';
 import { WalksService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
 import { CheckIconComponent, DeleteIconComponent } from '../Icons';
+import { isSameWeek, parse } from 'date-fns';
+import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-walk-card',
   standalone: true,
   imports: [
     CheckIconComponent,
-    DeleteIconComponent
+    DeleteIconComponent,
+    CurrencyPipe
    ],
   templateUrl: './walk-card.component.html',
   styleUrl: './walk-card.component.scss'
 })
 export class WalkCardComponent {
 
-  @Input()
-  public pet!: Pet;
+  @Input() public pet!: Pet;
+  @Input() public walksPrice!: WalksPrice;
 
-  @Output()
-  petDeleted = new EventEmitter<void>();
+  @Output() petDeleted = new EventEmitter<void>();
 
   private readonly walkService = inject( WalksService );
 
   public cardExpanded: boolean;
   public todayDate: string;
+  public lastProcessedDate: Date;
 
   constructor() {
     this.cardExpanded = false;
     this.todayDate = '';
+    this.lastProcessedDate = new Date('1900-01-01');
   }
 
   toggleData(): void {
@@ -134,5 +139,16 @@ export class WalkCardComponent {
         });
       }
     });
+  }
+
+  public isNewWeek( date: string ): boolean {
+
+    const currentDate = parse( date, 'dd-MM-yyyy', new Date() );
+
+    const returnValue = !isSameWeek( this.lastProcessedDate, currentDate, {weekStartsOn: 1} );
+
+    this.lastProcessedDate = currentDate;
+
+    return returnValue;
   }
 }

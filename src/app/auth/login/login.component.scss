@@ -69,12 +69,15 @@
     display: flex;
     margin: 0px 0.5rem 5rem 0px;
 
-    &:hover {
-        color: v.$third;
-    }
-
     input, label {
         cursor: pointer;
+    }
+
+    @include m.desktop {
+
+        &:hover {
+            color: v.$third;
+        }
     }
 }
 
