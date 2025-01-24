@@ -115,6 +115,8 @@ h3 {
     }
 }
 
+
+// ANIMACIONES
 @keyframes jelly-42 {
     from {
         transform: scale(1, 1);
@@ -136,5 +138,14 @@ h3 {
     }
     to {
         transform: scale(1, 1);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }

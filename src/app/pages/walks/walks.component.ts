@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Pet } from 'src/app/core/interfaces/pet.interface';
 import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
 import { AuthService, WalksService } from 'src/app/core/services';

@@ -1,7 +1,13 @@
 
-@if (!finishedAuthCheck()) {
-    <h1>loading</h1>
+@if ( !finishedAuthCheck() ) {
+
+    <div class="overlay">
+        <div class="spinner"></div>
+    </div>
 }
+
 @else {
+
     <router-outlet />
+
 }

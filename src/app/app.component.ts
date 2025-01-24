@@ -12,16 +12,11 @@ import { AuthService } from './core/services';
 })
 export class AppComponent {
 
-  private authService = inject( AuthService );
-  private router      = inject( Router );
+  private readonly authService = inject( AuthService );
+  private readonly router      = inject( Router );
 
-  public finishedAuthCheck = computed<boolean>( () => {
-
-    if ( this.authService.authStatus() === AuthStatus.checking ) {
-      return false;
-    }
-
-    return true;
+  public finishedAuthCheck = computed<boolean>(() => {
+    return this.authService.authStatus() !== AuthStatus.checking;
   });
 
   public authStatusChangedEffect = effect( () => {
@@ -33,13 +28,13 @@ export class AppComponent {
 
       case AuthStatus.authenticated:
         console.log(this.authService.authStatus());
-        this.router.navigateByUrl('/landing');
+        this.router.navigateByUrl('/landing', { replaceUrl: true });
         return;
 
       case AuthStatus.notAuthenticated:
-        this.router.navigateByUrl('/login');
+        this.router.navigateByUrl('/login', { replaceUrl: true });
         return;
 
     }
-  })
+  });
 }
