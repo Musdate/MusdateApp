@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Pet } from 'src/app/core/interfaces/pet.interface';
 import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
 import { AuthService, WalksService } from 'src/app/core/services';
@@ -13,7 +12,6 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [
     WalkCardComponent,
-    ReactiveFormsModule,
     PlusIconComponent,
     EditIconComponent
    ],
@@ -24,7 +22,6 @@ export class WalksComponent implements OnInit {
 
   private readonly walkService = inject( WalksService );
   private readonly authService = inject( AuthService );
-  private readonly fb          = inject( FormBuilder );
 
   public allPets: Pet[];
   public walksPrice: WalksPrice;
@@ -111,7 +108,7 @@ export class WalksComponent implements OnInit {
     });
   }
 
-  petDeleted(): void {
+  reloadPets(): void {
     this.loadPets();
   }
 
@@ -129,7 +126,7 @@ export class WalksComponent implements OnInit {
         return {
           name: (<HTMLInputElement>document.getElementById("swal-petName")).value,
           comment: (<HTMLInputElement>document.getElementById("swal-petComment")).value,
-          walks: ['']
+          walks: []
         };
       }
     });

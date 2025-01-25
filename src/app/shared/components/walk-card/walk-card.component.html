@@ -13,16 +13,10 @@
     @if ( cardExpanded ) {
         <div class="pet-info">
             <div class="btn-container">
-                <!-- <button>
-                    Seleccionar  Todo
-                </button> -->
-                <button (click)="walkPet()" class="btn green-btn">
+                <button (click)="addWalkPet()" class="btn green-btn">
                     <div> Merequetengue! </div>
                     <icon-check></icon-check>
                 </button>
-                <!-- <button>
-                    Pagado!
-                </button> -->
                 <button onKeyPress class="btn red-btn" (click)="deletePet( pet._id, pet.name )">
                     <div> Eliminar </div>
                     <icon-delete></icon-delete>
@@ -31,23 +25,27 @@
 
             <div class="date-container">
 
-                @for ( walk of pet.walks; track pet._id ) {
+                @for ( walk of pet.walks; track walk ) {
 
-                    @if ( isNewWeek( walk ) ) {
+                    @if ( walk.isNewWeek ) {
 
                         <div class="division-line"></div>
 
                     }
 
-                    <div> {{ walk }} </div>
+                    <div> {{ walk.date }} </div>
                 }
 
             </div>
 
-            <div class="total-container">
-                <div> Total: </div>
-                <div> {{ pet.totalPrice | currency }} </div>
-            </div>
+            @if ( pet.walks.length > 0 ) {
+
+                <div class="total-container">
+                    <div> Total: </div>
+                    <div> {{ pet.totalPrice | currency }} </div>
+                </div>
+
+            }
 
         </div>
     }

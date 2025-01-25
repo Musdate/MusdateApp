@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environments';
-import { Pet } from '../interfaces/pet.interface';
+import { Pet, Walk } from '../interfaces/pet.interface';
 import { Observable } from 'rxjs';
 import { WalksPrice } from '../interfaces/walks-price.interface';
 
@@ -30,9 +30,9 @@ export class WalksService {
     return this.http.delete<Pet>( url );
   }
 
-  addWalk( id: string, walk: string ) {
+  addWalk( id: string, walk: Walk ) {
     const url = `${ this.baseUrl }/walks/addWalk/${ id }`;
-    return this.http.patch<Pet>( url, { walk } );
+    return this.http.patch<Pet>( url, walk );
   }
 
   addWalksPrice( userId: string , body: WalksPrice ) {

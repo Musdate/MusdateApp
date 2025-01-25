@@ -20,7 +20,7 @@
 
         @for ( pet of allPets; track pet._id ) {
 
-            <app-walk-card [pet]="pet" [walksPrice]="walksPrice" (petDeleted)="petDeleted()"></app-walk-card>
+            <app-walk-card [pet]="pet" [walksPrice]="walksPrice" (reloadPets)="reloadPets()"></app-walk-card>
 
         }
 

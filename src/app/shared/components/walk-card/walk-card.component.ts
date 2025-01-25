@@ -1,11 +1,10 @@
+import { CurrencyPipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Pet } from 'src/app/core/interfaces/pet.interface';
+import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
 import { WalksService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
 import { CheckIconComponent, DeleteIconComponent } from '../Icons';
-import { isSameWeek, parse } from 'date-fns';
-import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
-import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-walk-card',
@@ -23,7 +22,7 @@ export class WalkCardComponent {
   @Input() public pet!: Pet;
   @Input() public walksPrice!: WalksPrice;
 
-  @Output() petDeleted = new EventEmitter<void>();
+  @Output() reloadPets = new EventEmitter<void>();
 
   private readonly walkService = inject( WalksService );
 
@@ -34,7 +33,7 @@ export class WalkCardComponent {
   constructor() {
     this.cardExpanded = false;
     this.todayDate = '';
-    this.lastProcessedDate = new Date('1900-01-01');
+    this.lastProcessedDate = new Date('2000-01-01');
   }
 
   toggleData(): void {
@@ -77,7 +76,7 @@ export class WalkCardComponent {
             });
           },
           complete: () => {
-            this.petDeleted.emit();
+            this.reloadPets.emit();
           },
           error: (message) => {
             Swal.fire({
@@ -91,12 +90,12 @@ export class WalkCardComponent {
     });
   }
 
-  walkPet(): void {
+  addWalkPet(): void {
     let today = new Date();
     this.todayDate = `${ today.getDate() < 10 ? '0' + today.getDate() : today.getDate() }-${ (today.getMonth() + 1) < 10 ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1) }-${ today.getFullYear() }`;
 
     for ( let walk of this.pet.walks ) {
-      if ( this.todayDate == walk ) {
+      if ( this.todayDate == walk.date ) {
         Swal.fire({
           position: 'top-end',
           title: `Ya has paseado a ${ this.pet.name } hoy!!`,
@@ -113,7 +112,12 @@ export class WalkCardComponent {
       }
     }
 
-    this.walkService.addWalk( this.pet._id, this.todayDate ).subscribe({
+    const addWalkData = {
+      date: this.todayDate,
+      isNewWeek: false
+    }
+
+    this.walkService.addWalk( this.pet._id, addWalkData ).subscribe({
       next: () => {
         Swal.fire({
           position: 'top-end',
@@ -129,7 +133,7 @@ export class WalkCardComponent {
         });
       },
       complete: () => {
-        this.petDeleted.emit();
+        this.reloadPets.emit();
       },
       error: (message) => {
         Swal.fire({
@@ -139,16 +143,5 @@ export class WalkCardComponent {
         });
       }
     });
-  }
-
-  public isNewWeek( date: string ): boolean {
-
-    const currentDate = parse( date, 'dd-MM-yyyy', new Date() );
-
-    const returnValue = !isSameWeek( this.lastProcessedDate, currentDate, {weekStartsOn: 1} );
-
-    this.lastProcessedDate = currentDate;
-
-    return returnValue;
   }
 }
