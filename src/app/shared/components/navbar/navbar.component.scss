@@ -16,18 +16,20 @@
 }
 
 .navbar {
+    position: fixed;
+    z-index: 999;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 v.$separation;
-    margin: 0px 0px 2.5rem 0px;
     height: 7rem;
     width: 100%;
     color: v.$white;
     font-weight: 500;
     background: linear-gradient(90deg,
     rgba(255,200,075,0.50) 15%,
-    rgba(200,100,225,0.50) 85%);
+    rgba(200,100,225,0.50) 85%),
+    rgb(255, 255, 255);
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
