@@ -2,10 +2,13 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Pet, Walk } from 'src/app/core/interfaces/pet.interface';
 import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
-import { WalksService } from 'src/app/core/services';
+import { AuthService, WalksService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
-import { CheckIconComponent, DeleteIconComponent, WalksIconComponent } from '../Icons';
-import { DollarIconComponent } from '../Icons/dollar-icon.component';
+import { CheckIconComponent, DeleteIconComponent, WalksIconComponent, DollarIconComponent, PdfIconComponent } from '../Icons';
+import generatePDF from '../libs/walks-pdf';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale/es'
+
 
 @Component({
   selector: 'app-walk-card',
@@ -15,6 +18,7 @@ import { DollarIconComponent } from '../Icons/dollar-icon.component';
     DeleteIconComponent,
     DollarIconComponent,
     WalksIconComponent,
+    PdfIconComponent,
     CurrencyPipe,
     CommonModule
    ],
@@ -29,6 +33,7 @@ export class WalkCardComponent {
   @Output() reloadPets = new EventEmitter<void>();
 
   private readonly walkService = inject( WalksService );
+  private readonly authService = inject( AuthService );
 
   public cardExpanded: boolean;
   public todayDate: string;
@@ -192,5 +197,14 @@ export class WalkCardComponent {
         });
       }
     });
+  }
+
+  public exportPdf() {
+
+    const pet = this.pet;
+    const date = format( new Date(), "EEEE dd 'de' MMMM, yyyy", { locale: es } );
+
+    generatePDF( pet, date.charAt(0).toUpperCase() + date.slice(1), this.authService.currentUser()!.name );
+
   }
 }
