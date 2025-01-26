@@ -90,3 +90,16 @@
     gap: v.$separation;
     margin: v.$separation 0px;
 }
+
+.walk-date {
+    cursor: pointer;
+}
+
+.paid-walk {
+    color: v.$third;
+    cursor: default;
+}
+
+.selected-walk {
+    color: v.$secondary;
+}

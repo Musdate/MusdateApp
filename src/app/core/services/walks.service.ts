@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environments';
-import { Pet, Walk } from '../interfaces/pet.interface';
+import { Pet, UpdatePet, Walk } from '../interfaces/pet.interface';
 import { Observable } from 'rxjs';
 import { WalksPrice } from '../interfaces/walks-price.interface';
 
@@ -23,6 +23,11 @@ export class WalksService {
   findAllPets( userId: string ): Observable<Pet[]> {
     const url = `${ this.baseUrl }/walks/getAllPets/${ userId }`;
     return this.http.get<Pet[]>( url );
+  }
+
+  updatePet( petId: string, body: UpdatePet ): Observable<Pet[]> {
+    const url = `${ this.baseUrl }/walks/updatePet/${ petId }`;
+    return this.http.patch<Pet[]>( url, body );
   }
 
   deletePet( id: string ) {

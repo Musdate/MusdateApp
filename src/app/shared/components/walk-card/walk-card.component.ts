@@ -1,10 +1,11 @@
-import { CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Pet } from 'src/app/core/interfaces/pet.interface';
+import { Pet, Walk } from 'src/app/core/interfaces/pet.interface';
 import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
 import { WalksService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
-import { CheckIconComponent, DeleteIconComponent } from '../Icons';
+import { CheckIconComponent, DeleteIconComponent, WalksIconComponent } from '../Icons';
+import { DollarIconComponent } from '../Icons/dollar-icon.component';
 
 @Component({
   selector: 'app-walk-card',
@@ -12,7 +13,10 @@ import { CheckIconComponent, DeleteIconComponent } from '../Icons';
   imports: [
     CheckIconComponent,
     DeleteIconComponent,
-    CurrencyPipe
+    DollarIconComponent,
+    WalksIconComponent,
+    CurrencyPipe,
+    CommonModule
    ],
   templateUrl: './walk-card.component.html',
   styleUrl: './walk-card.component.scss'
@@ -28,12 +32,10 @@ export class WalkCardComponent {
 
   public cardExpanded: boolean;
   public todayDate: string;
-  public lastProcessedDate: Date;
 
   constructor() {
     this.cardExpanded = false;
     this.todayDate = '';
-    this.lastProcessedDate = new Date('2000-01-01');
   }
 
   toggleData(): void {
@@ -114,7 +116,8 @@ export class WalkCardComponent {
 
     const addWalkData = {
       date: this.todayDate,
-      isNewWeek: false
+      isNewWeek: false,
+      paid: false
     }
 
     this.walkService.addWalk( this.pet._id, addWalkData ).subscribe({
@@ -122,6 +125,52 @@ export class WalkCardComponent {
         Swal.fire({
           position: 'top-end',
           title: `Has paseado a ${ this.pet.name }!!`,
+          icon: 'success',
+          timer: 1500,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          showClass: {
+            popup: `animate__animated animate__fadeIn`
+          },
+          didClose: () => window.scrollTo({ top: 0 })
+        });
+      },
+      complete: () => {
+        this.reloadPets.emit();
+      },
+      error: (message) => {
+        Swal.fire({
+          title: 'Error',
+          text: message,
+          icon: 'error'
+        });
+      }
+    });
+  }
+
+  public toggleClickWalk( walk: Walk ): void {
+
+    walk.clicked = !walk.clicked;
+
+  }
+
+  public payWalks() {
+
+    this.pet.walks.forEach(( walk ) => {
+      if ( walk.clicked ) {
+        walk.paid = true;
+      }
+    });
+
+    const updatePetData = {
+      walks: this.pet.walks.map( ({ clicked, ...rest }) => rest )
+    }
+
+    this.walkService.updatePet( this.pet._id, updatePetData ).subscribe({
+      next: () => {
+        Swal.fire({
+          position: 'top-end',
+          title: `Pagos pendientes actualizados.`,
           icon: 'success',
           timer: 1500,
           timerProgressBar: true,

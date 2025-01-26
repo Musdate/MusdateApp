@@ -89,7 +89,8 @@ h3 {
     all: unset;
     display: flex;
     align-items: center;
-    border-radius: 2rem;
+    border-radius: 2.5rem;
+    height: 3rem;
     color: v.$darkGrey;
     padding: 1rem;
     background-color: v.$white;
@@ -101,17 +102,31 @@ h3 {
     }
 }
 
-.red-btn {
+.danger-btn {
 
     &:hover {
-        color: rgb(150, 50, 50);
+        color: v.$red;
     }
 }
 
-.green-btn {
+.success-btn {
 
     &:hover {
-        color: rgb(80, 150, 50);
+        color: v.$green;
+    }
+}
+
+.primary-btn {
+
+    &:hover {
+        color: v.$third;
+    }
+}
+
+.warn-btn {
+
+    &:hover {
+        color: v.$secondary;
     }
 }
 

@@ -14,12 +14,16 @@
         <div class="pet-info">
 
             <div class="btn-container">
-                <button (click)="addWalkPet()" class="btn green-btn">
-                    <div> Merequetengue! </div>
+                <button class="btn warn-btn">
                     <icon-check></icon-check>
                 </button>
-                <button onKeyPress class="btn red-btn" (click)="deletePet( pet._id, pet.name )">
-                    <div> Eliminar </div>
+                <button class="btn primary-btn" (click)="addWalkPet()">
+                    <icon-walks></icon-walks>
+                </button>
+                <button class="btn success-btn" (click)="payWalks()">
+                    <icon-dollar></icon-dollar>
+                </button>
+                <button class="btn danger-btn" (click)="deletePet( pet._id, pet.name )">
                     <icon-delete></icon-delete>
                 </button>
             </div>
@@ -38,7 +42,15 @@
 
                             }
 
-                            <div> {{ walk.date }} </div>
+                            <div onKeyPress
+                                 class="walk-date"
+                                 [ngClass]="{ 'paid-walk': walk.paid, 'selected-walk': walk.clicked }"
+                                 (click)="!walk.paid && toggleClickWalk( walk )">
+
+                                {{ walk.date }}
+
+                            </div>
+
                         }
 
                     </div>
@@ -47,7 +59,7 @@
 
                         <div class="total-container">
                             <div> Pendiente: </div>
-                            <div> {{ 0 | currency }} </div>
+                            <div> {{ pet.pendingPrice | currency }} </div>
                         </div>
 
                     </div>
@@ -56,7 +68,7 @@
 
                         <div class="total-container">
                             <div> Total: </div>
-                            <div> {{ 15000000 | currency }} </div>
+                            <div> {{ pet.totalPrice | currency }} </div>
                         </div>
 
                     </div>
