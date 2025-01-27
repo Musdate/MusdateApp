@@ -1,4 +1,5 @@
 @use 'variables' as v;
+@use 'mixins' as m;
 
 html {
     font-size: 62.5%;
@@ -102,32 +103,34 @@ h3 {
     }
 }
 
-.danger-btn {
+.hover-btn {
 
-    &:hover {
-        color: v.$red;
+    @include m.desktop {
+
+        &:hover {
+            background-color: #eeeeee;
+        }
     }
+}
+
+.danger-btn {
+    color: v.$red;
 }
 
 .success-btn {
-
-    &:hover {
-        color: v.$green;
-    }
-}
-
-.primary-btn {
-
-    &:hover {
-        color: v.$third;
-    }
+    color: v.$green;
 }
 
 .warn-btn {
+    color: v.$secondary;
+}
 
-    &:hover {
-        color: v.$secondary;
-    }
+.primary-btn {
+    color: v.$third;
+}
+
+.secondary-btn {
+    color: v.$primary;
 }
 
 

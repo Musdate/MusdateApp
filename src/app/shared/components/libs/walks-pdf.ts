@@ -1,14 +1,20 @@
+import { CurrencyPipe } from "@angular/common";
+import { format } from "date-fns";
+import { es } from 'date-fns/locale/es';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { Pet } from "src/app/core/interfaces/pet.interface";
 import { LogoLadriaventuras } from "../../../../assets/LogoLadriaventuras";
-import { CurrencyPipe } from "@angular/common";
 
 (pdfMake as any).vfs = pdfFonts.vfs;
 
-const generatePDF = ( pet: Pet, date: string, userName: string ) => {
+const generatePDF = ( pet: Pet, userName: string ) => {
 
-    const currencyPipe = new CurrencyPipe('en-US')
+    const currencyPipe = new CurrencyPipe('en-US');
+    const date = new Date();
+    let formatedLongDate = format( date, "EEEE dd 'de' MMMM, yyyy", { locale: es } );
+    formatedLongDate = formatedLongDate.charAt(0).toUpperCase() + formatedLongDate.slice(1);
+    const formatedShortDate = format( date, "yyyyMMdd");
 
     const tableBody = [
         [
@@ -40,7 +46,7 @@ const generatePDF = ( pet: Pet, date: string, userName: string ) => {
                     {
                         text: [
                             { text: 'Fecha: ', style: "header" },
-                            { text: date, style: "subheader" }
+                            { text: formatedLongDate, style: "subheader" }
                         ],
                         alignment: "left",
                         margin: [ 10, 0, 0, 0 ]
@@ -155,13 +161,12 @@ const generatePDF = ( pet: Pet, date: string, userName: string ) => {
         },
     };
 
-
     const docDefinition: any = {
         content,
         styles,
     };
 
-    pdfMake.createPdf(docDefinition).open();
+    pdfMake.createPdf(docDefinition).download(`Paseos_${ pet.name }_${ formatedShortDate }.pdf`);
 };
 
 export default generatePDF;

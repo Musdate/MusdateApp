@@ -14,19 +14,26 @@
         <div class="pet-info">
 
             <div class="btn-container">
-                <button class="btn warn-btn">
+                <!-- CHECK BUTTON -->
+                <button class="btn hover-btn"
+                        [ngClass]="{'check-button': isCheckedButton}"
+                        (click)="toogleChecked()">
                     <icon-check></icon-check>
                 </button>
-                <button class="btn primary-btn" (click)="addWalkPet()">
+                <!-- WALK BUTTON -->
+                <button class="btn primary-btn hover-btn" (click)="addWalkPet()">
                     <icon-walks></icon-walks>
                 </button>
-                <button class="btn success-btn" (click)="payWalks()">
+                <!-- PAID BUTTON -->
+                <button class="btn success-btn hover-btn" (click)="payWalks()">
                     <icon-dollar></icon-dollar>
                 </button>
-                <button class="btn primary-btn" (click)="exportPdf()">
+                <!-- PDF BUTTON -->
+                <button class="btn secondary-btn hover-btn" (click)="exportPdf()">
                     <icon-pdf></icon-pdf>
                 </button>
-                <button class="btn danger-btn" (click)="deletePet( pet._id, pet.name )">
+                <!-- DELETE BUTTON -->
+                <button class="btn danger-btn hover-btn" (click)="deletePet( pet._id, pet.name )">
                     <icon-delete></icon-delete>
                 </button>
             </div>

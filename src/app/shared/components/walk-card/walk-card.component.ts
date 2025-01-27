@@ -6,9 +6,6 @@ import { AuthService, WalksService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
 import { CheckIconComponent, DeleteIconComponent, WalksIconComponent, DollarIconComponent, PdfIconComponent } from '../Icons';
 import generatePDF from '../libs/walks-pdf';
-import { format } from 'date-fns';
-import { es } from 'date-fns/locale/es'
-
 
 @Component({
   selector: 'app-walk-card',
@@ -37,10 +34,12 @@ export class WalkCardComponent {
 
   public cardExpanded: boolean;
   public todayDate: string;
+  public isCheckedButton: boolean;
 
   constructor() {
     this.cardExpanded = false;
     this.todayDate = '';
+    this.isCheckedButton = false;
   }
 
   toggleData(): void {
@@ -153,12 +152,6 @@ export class WalkCardComponent {
     });
   }
 
-  public toggleClickWalk( walk: Walk ): void {
-
-    walk.clicked = !walk.clicked;
-
-  }
-
   public payWalks() {
 
     this.pet.walks.forEach(( walk ) => {
@@ -199,12 +192,23 @@ export class WalkCardComponent {
     });
   }
 
-  public exportPdf() {
-
+  public exportPdf(): void {
     const pet = this.pet;
-    const date = format( new Date(), "EEEE dd 'de' MMMM, yyyy", { locale: es } );
+    generatePDF( pet, this.authService.currentUser()!.name );
+  }
 
-    generatePDF( pet, date.charAt(0).toUpperCase() + date.slice(1), this.authService.currentUser()!.name );
+  public toggleClickWalk( walk: Walk ): void {
+    walk.clicked = !walk.clicked;
+    this.isCheckedButton = walk.clicked ? this.pet.walks.every(( walk ) => walk.paid || walk.clicked ) : false;
+  }
 
+  public toogleChecked(): void {
+    this.isCheckedButton = !this.isCheckedButton;
+
+    this.pet.walks.forEach(( walk ) => {
+      if ( !walk.paid ) {
+        walk.clicked = this.isCheckedButton;
+      }
+    });
   }
 }

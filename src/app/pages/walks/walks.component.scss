@@ -8,3 +8,17 @@
     display: flex;
     gap: v.$separation;
 }
+
+.price-btn {
+
+    &:hover {
+        color: v.$secondary;
+    }
+}
+
+.add-pet-btn {
+
+    &:hover {
+        color: v.$green;
+    }
+}
