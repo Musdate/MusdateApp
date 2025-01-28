@@ -61,8 +61,7 @@ export class WalksComponent implements OnInit {
           showConfirmButton: false,
           showClass: {
             popup: `animate__animated animate__fadeIn`
-          },
-          didClose: () => window.scrollTo({ top: 0 })
+          }
         });
       },
       complete: () => {
@@ -90,8 +89,7 @@ export class WalksComponent implements OnInit {
           showConfirmButton: false,
           showClass: {
             popup: `animate__animated animate__fadeIn`
-          },
-          didClose: () => window.scrollTo({ top: 0 })
+          }
         });
       },
       complete: () => {

@@ -58,12 +58,9 @@ export class WalkCardComponent {
       showCancelButton: true,
       confirmButtonText: "Eliminar",
       cancelButtonText: "Cancelar",
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
       showClass: {
         popup: `animate__animated animate__fadeIn`
-      },
-      didClose: () => window.scrollTo({ top: 0 })
+      }
     }).then(( result ) => {
       if ( result.isConfirmed ) {
 
@@ -112,8 +109,7 @@ export class WalkCardComponent {
           showConfirmButton: false,
           showClass: {
             popup: `animate__animated animate__fadeIn`
-          },
-          didClose: () => window.scrollTo({ top: 0 })
+          }
         });
         return;
       }
@@ -136,8 +132,7 @@ export class WalkCardComponent {
           showConfirmButton: false,
           showClass: {
             popup: `animate__animated animate__fadeIn`
-          },
-          didClose: () => window.scrollTo({ top: 0 })
+          }
         });
       },
       complete: () => {
@@ -176,8 +171,7 @@ export class WalkCardComponent {
           showConfirmButton: false,
           showClass: {
             popup: `animate__animated animate__fadeIn`
-          },
-          didClose: () => window.scrollTo({ top: 0 })
+          }
         });
       },
       complete: () => {

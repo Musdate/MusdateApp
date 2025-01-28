@@ -69,8 +69,10 @@
     }
 
     .swal2-actions {
+        gap: v.$separation;
 
-        .swal2-confirm {
+        .swal2-confirm,
+        .swal2-cancel {
             width: 15rem;
             height: 4.5rem;
             margin: 0px 0px 1.5rem 0px;
@@ -83,10 +85,23 @@
             border-radius: 1rem;
             transition: background-color .3s ease;
             box-shadow: v.$cardShadow;
+        }
+
+        .swal2-confirm {
+            background-color: v.$third;
 
             &:hover {
                 cursor: pointer;
                 background-color: lighten(v.$third, 5);
+            }
+        }
+
+        .swal2-cancel {
+            background-color: v.$red;
+
+            &:hover {
+                cursor: pointer;
+                background-color: lighten(v.$red, 5);
             }
         }
     }
