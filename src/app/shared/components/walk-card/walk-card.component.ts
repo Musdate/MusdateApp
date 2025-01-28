@@ -4,7 +4,7 @@ import { Pet, Walk } from 'src/app/core/interfaces/pet.interface';
 import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
 import { AuthService, WalksService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
-import { CheckIconComponent, DeleteIconComponent, WalksIconComponent, DollarIconComponent, PdfIconComponent } from '../Icons';
+import { CheckIconComponent, DeleteIconComponent, WalksIconComponent, DollarIconComponent, PdfIconComponent, EditIconComponent } from '../Icons';
 import generatePDF from '../libs/walks-pdf';
 
 @Component({
@@ -15,6 +15,7 @@ import generatePDF from '../libs/walks-pdf';
     DeleteIconComponent,
     DollarIconComponent,
     WalksIconComponent,
+    EditIconComponent,
     PdfIconComponent,
     CurrencyPipe,
     CommonModule

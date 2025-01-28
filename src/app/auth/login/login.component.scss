@@ -13,6 +13,7 @@
         border-radius: 1rem;
         color: v.$darkGrey;
         caret-color: v.$lightGrey;
+        box-shadow: v.$cardShadow;
 
         &::placeholder {
             color: v.$lightGrey;
@@ -68,6 +69,7 @@
 .remember-container {
     display: flex;
     margin: 0px 0.5rem 5rem 0px;
+    width: fit-content;
 
     input, label {
         cursor: pointer;

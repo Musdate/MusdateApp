@@ -1,54 +1,6 @@
 @use 'variables' as v;
 @use 'mixins' as m;
 
-html {
-    font-size: 62.5%;
-    box-sizing: border-box;
-}
-
-*, *:before, *:after {
-    box-sizing: inherit;
-}
-
-body {
-    font-family: v.$font;
-    font-size: 1.6rem;
-    background-color: #E3E6E6;
-}
-
-p {
-    font-size: 2rem;
-}
-
-a {
-    text-decoration: none;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    vertical-align: middle;
-    font-size: italic;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-h1, h2, h3 {
-    margin: 0 0 v.$separation 0;
-}
-
-h1 {
-    font-size: 4rem;
-}
-
-h2 {
-    font-size: 3.6rem;
-}
-
-h3 {
-    font-size: 3.2rem;
-}
-
 .container {
     display: flex;
     width: 100%;
@@ -71,15 +23,71 @@ h3 {
 
 // SWALFIRE 2 MODAL
 .swal2-modal {
+    min-width: fit-content;
+
+    .swal2-title {
+        font-size: 2.4rem;
+    }
 
     .swal2-html-container {
+        font-size: 1.6rem;
         display: flex !important;
         flex-direction: column;
         align-items: flex-start;
 
         input {
-            width: 100%;
-            margin: 0.2rem 0px 0.5rem 0px;
+            width: 27.5rem;
+            margin: 0.2rem 0px 1rem 0px;
+            padding: 0px 1rem;
+            height: 4.5rem;
+            border-radius: 1rem;
+            background: v.$white;
+            color: v.$darkGrey;
+            caret-color: v.$lightGrey;
+            box-sizing: border-box;
+            transition: box-shadow 0.1s;
+            border: 1px solid #d9d9d9;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.06),0 0 0 3px rgba(0,0,0,0);
+
+            &::placeholder {
+                color: v.$lightGrey;
+            }
+
+            &:focus {
+                border: unset;
+                outline: none;
+                box-shadow: inset 0 1px 1px
+                rgba(0, 0, 0, 0.05),
+                0 0 0 3px
+                rgba(108, 194, 230, 0.5);
+            }
+        }
+
+        label {
+            margin: 0px 1rem;
+        }
+    }
+
+    .swal2-actions {
+
+        .swal2-confirm {
+            width: 15rem;
+            height: 4.5rem;
+            margin: 0px 0px 1.5rem 0px;
+            font-size: 1.5rem;
+            background-color: v.$third;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            color: v.$white;
+            border-radius: 1rem;
+            transition: background-color .3s ease;
+            box-shadow: v.$cardShadow;
+
+            &:hover {
+                cursor: pointer;
+                background-color: lighten(v.$third, 5);
+            }
         }
     }
 }

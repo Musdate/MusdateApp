@@ -116,12 +116,13 @@ export class WalksComponent implements OnInit {
     const { value: formValues } = await Swal.fire({
       title: "Agregar Mascota",
       html: `
-        <label for="swal-petName">Nombre: </label>
+        <label for="swal-petName"> Nombre </label>
         <input id="swal-petName" type="text" placeholder="Nombre Mascota">
-        <label for="swal-petComment">Comentario: </label>
+        <label for="swal-petComment"> Comentario </label>
         <input id="swal-petComment" type="text" placeholder="Comentario">
       `,
       focusConfirm: false,
+      confirmButtonText: "Guardar",
       preConfirm: () => {
         return {
           name: (<HTMLInputElement>document.getElementById("swal-petName")).value,
@@ -139,16 +140,17 @@ export class WalksComponent implements OnInit {
     const { value: formValues } = await Swal.fire({
       title: "Editar Precios",
       html: `
-        <label for="swal-oneDay">1 día: </label>
+        <label for="swal-oneDay"> 1 día </label>
         <input id="swal-oneDay" type="number" placeholder="0" value="${this.walksPrice.oneDay}">
-        <label for="swal-threeDays">3 días: </label>
+        <label for="swal-threeDays"> 3 días </label>
         <input id="swal-threeDays" type="number" placeholder="0" value="${this.walksPrice.threeDays}">
-        <label for="swal-fourDays">4 días: </label>
+        <label for="swal-fourDays"> 4 días </label>
         <input id="swal-fourDays" type="number" placeholder="0" value="${this.walksPrice.fourDays}">
-        <label for="swal-fiveDays">5 días: </label>
+        <label for="swal-fiveDays"> 5 días </label>
         <input id="swal-fiveDays" type="number" placeholder="0" value="${this.walksPrice.fiveDays}">
-      `,
+        `,
       focusConfirm: false,
+      confirmButtonText: "Guardar",
       preConfirm: () => {
         console.log(this.walksPrice.oneDay);
         return {
