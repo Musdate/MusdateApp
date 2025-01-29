@@ -62,6 +62,7 @@ export class WalksComponent implements OnInit {
           text: message.error.message,
           icon: 'error'
         });
+        this.isLoadingPets = false;
       },
       complete: () => {
         this.isLoadingPets = false;
@@ -82,6 +83,7 @@ export class WalksComponent implements OnInit {
           text: message.error.message,
           icon: 'error'
         });
+        this.isLoadingWalks = false;
       },
       complete: () => {
         this.isLoadingWalks = false;
@@ -112,6 +114,7 @@ export class WalksComponent implements OnInit {
           text: message.error.message,
           icon: 'error'
         });
+        this.isLoading = false;
       },
       complete: () => {
         this.loadPets();
@@ -143,6 +146,7 @@ export class WalksComponent implements OnInit {
           text: message.error.message,
           icon: 'error'
         });
+        this.isLoading = false;
       },
       complete: () => {
         this.loadWalksPrice();
@@ -181,6 +185,8 @@ export class WalksComponent implements OnInit {
   }
 
   async getWalksPrecios() {
+    const originalValues = { ...this.walksPrice };
+
     const { value: formValues } = await Swal.fire({
       title: "Editar Precios",
       html: `
@@ -196,7 +202,6 @@ export class WalksComponent implements OnInit {
       focusConfirm: false,
       confirmButtonText: "Guardar",
       preConfirm: () => {
-        console.log(this.walksPrice.oneDay);
         return {
           oneDay: parseInt((<HTMLInputElement>document.getElementById("swal-oneDay")).value) || 0,
           threeDays: parseInt((<HTMLInputElement>document.getElementById("swal-threeDays")).value) || 0,
@@ -206,7 +211,16 @@ export class WalksComponent implements OnInit {
       }
     });
     if ( formValues ) {
-      this.onSaveWalksPrice( formValues);
+      if ( originalValues.oneDay === formValues.oneDay && originalValues.threeDays === formValues.threeDays &&
+           originalValues.fourDays === formValues.fourDays && originalValues.fiveDays === formValues.fiveDays ) {
+
+        return;
+
+      } else {
+
+        this.onSaveWalksPrice( formValues );
+
+      }
     }
   }
 }

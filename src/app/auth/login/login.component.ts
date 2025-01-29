@@ -59,24 +59,27 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
 
     this.authService.login( email, password ).subscribe({
-        next: () => { this.router.navigateByUrl('/landing') },
-        error: ( message ) => {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Error',
-            text: message.error.message,
-            timer: 2500,
-            timerProgressBar: true,
-            showConfirmButton: false,
-            showClass: {
-              popup: `animate__animated animate__fadeIn`
-            },
-          });
-        },
-        complete: () => {
-          this.isLoading = false;
-        }
-      });
+      next: () => {
+        this.router.navigateByUrl('/landing')
+      },
+      error: ( message ) => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Error',
+          text: message,
+          timer: 2500,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          showClass: {
+            popup: `animate__animated animate__fadeIn`
+          },
+        });
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
   }
 }

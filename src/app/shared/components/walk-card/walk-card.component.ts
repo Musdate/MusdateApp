@@ -101,6 +101,7 @@ export class WalkCardComponent {
               text: message.error.message,
               icon: 'error'
             });
+            this.isLoading = false;
           },
           complete: () => {
             this.reloadPets.emit();
@@ -211,6 +212,7 @@ export class WalkCardComponent {
           text: message.error.message,
           icon: 'error'
         });
+        this.isLoading = false;
       },
       complete: () => {
         this.reloadPets.emit();
@@ -268,6 +270,7 @@ export class WalkCardComponent {
           text: message.error.message,
           icon: 'error'
         });
+        this.isLoading = false;
       },
       complete: () => {
         this.reloadPets.emit();
@@ -310,6 +313,7 @@ export class WalkCardComponent {
           text: message.error.message,
           icon: 'error'
         });
+        this.isLoading = false;
       },
       complete: () => {
         this.reloadPets.emit();
