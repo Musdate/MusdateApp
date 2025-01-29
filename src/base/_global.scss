@@ -14,7 +14,7 @@
     justify-content: center;
 }
 
-.iconContainer {
+.icon-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -35,7 +35,7 @@
         flex-direction: column;
         align-items: flex-start;
 
-        input {
+        .modal-input {
             width: 27.5rem;
             margin: 0.2rem 0px 1rem 0px;
             padding: 0px 1rem;
@@ -61,6 +61,31 @@
                 0 0 0 3px
                 rgba(108, 194, 230, 0.5);
             }
+        }
+
+        .modal-date-container {
+            width: 27.5rem;
+            height: 20rem;
+            overflow: auto;
+            scrollbar-width: thin;
+            scrollbar-color: v.$midGrey transparent;
+            border-radius: 1rem;
+            border: 1px solid #d9d9d9;
+            padding: 0px v.$separation;
+
+            .modal-values-date {
+                display: flex;
+
+                .modal-date-input {
+                    width: 100%;
+                    border: unset;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+
         }
 
         label {
@@ -106,7 +131,6 @@
         }
     }
 }
-
 
 // BUTTONS
 .btn {

@@ -67,10 +67,10 @@ export class WalksComponent implements OnInit {
       complete: () => {
         this.loadPets();
       },
-      error: (message) => {
+      error: ( message ) => {
         Swal.fire({
           title: 'Error',
-          text: message,
+          text: message.error.message,
           icon: 'error'
         });
       }
@@ -96,10 +96,10 @@ export class WalksComponent implements OnInit {
         this.loadWalksPrice();
         this.loadPets();
       },
-      error: (message) => {
+      error: ( message ) => {
         Swal.fire({
           title: 'Error',
-          text: message,
+          text: message.error.message,
           icon: 'error'
         });
       }
@@ -115,9 +115,9 @@ export class WalksComponent implements OnInit {
       title: "Agregar Mascota",
       html: `
         <label for="swal-petName"> Nombre </label>
-        <input id="swal-petName" type="text" placeholder="Nombre Mascota">
+        <input id="swal-petName" class="modal-input" type="text" placeholder="Nombre Mascota">
         <label for="swal-petComment"> Comentario </label>
-        <input id="swal-petComment" type="text" placeholder="Comentario">
+        <input id="swal-petComment" class="modal-input" type="text" placeholder="Comentario">
       `,
       focusConfirm: false,
       confirmButtonText: "Guardar",
@@ -139,13 +139,13 @@ export class WalksComponent implements OnInit {
       title: "Editar Precios",
       html: `
         <label for="swal-oneDay"> 1 día </label>
-        <input id="swal-oneDay" type="number" placeholder="0" value="${this.walksPrice.oneDay}">
+        <input id="swal-oneDay" class="modal-input" type="number" placeholder="0" value="${this.walksPrice.oneDay}">
         <label for="swal-threeDays"> 3 días </label>
-        <input id="swal-threeDays" type="number" placeholder="0" value="${this.walksPrice.threeDays}">
+        <input id="swal-threeDays" class="modal-input" type="number" placeholder="0" value="${this.walksPrice.threeDays}">
         <label for="swal-fourDays"> 4 días </label>
-        <input id="swal-fourDays" type="number" placeholder="0" value="${this.walksPrice.fourDays}">
+        <input id="swal-fourDays" class="modal-input" type="number" placeholder="0" value="${this.walksPrice.fourDays}">
         <label for="swal-fiveDays"> 5 días </label>
-        <input id="swal-fiveDays" type="number" placeholder="0" value="${this.walksPrice.fiveDays}">
+        <input id="swal-fiveDays" class="modal-input" type="number" placeholder="0" value="${this.walksPrice.fiveDays}">
         `,
       focusConfirm: false,
       confirmButtonText: "Guardar",

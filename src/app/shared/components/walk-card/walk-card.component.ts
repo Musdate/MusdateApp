@@ -1,10 +1,12 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Pet, Walk } from 'src/app/core/interfaces/pet.interface';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { isValid, parse } from 'date-fns';
+import { Pet, UpdatePet, Walk } from 'src/app/core/interfaces/pet.interface';
 import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
 import { AuthService, WalksService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
-import { CheckIconComponent, DeleteIconComponent, WalksIconComponent, DollarIconComponent, PdfIconComponent, EditIconComponent } from '../Icons';
+import { CheckIconComponent, DeleteIconComponent, DollarIconComponent, EditIconComponent, PdfIconComponent, PlusIconComponent, WalksIconComponent } from '../Icons';
 import generatePDF from '../libs/walks-pdf';
 
 @Component({
@@ -17,8 +19,10 @@ import generatePDF from '../libs/walks-pdf';
     WalksIconComponent,
     EditIconComponent,
     PdfIconComponent,
+    PlusIconComponent,
     CurrencyPipe,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
    ],
   templateUrl: './walk-card.component.html',
   styleUrl: './walk-card.component.scss'
@@ -32,26 +36,33 @@ export class WalkCardComponent {
 
   private readonly walkService = inject( WalksService );
   private readonly authService = inject( AuthService );
+  private readonly fb          = inject( FormBuilder );
 
   public cardExpanded: boolean;
   public todayDate: string;
   public isCheckedButton: boolean;
+  public editWalks: boolean;
+  public walkForm: FormGroup;
 
   constructor() {
     this.cardExpanded = false;
     this.todayDate = '';
     this.isCheckedButton = false;
+    this.editWalks = false;
+    this.walkForm = this.fb.group({
+      walks: this.fb.array([])
+    });
   }
 
   toggleData(): void {
     this.cardExpanded = !this.cardExpanded;
   }
 
-  deletePet( id: string, name: string ): void {
+  deletePet(): void {
 
     Swal.fire({
       position: 'center',
-      title: `¿Estás seguro que deseas eliminar a ${ name }?`,
+      title: `¿Estás seguro que deseas eliminar a ${ this.pet.name }?`,
       icon: 'warning',
       timerProgressBar: true,
       showConfirmButton: true,
@@ -64,11 +75,11 @@ export class WalkCardComponent {
     }).then(( result ) => {
       if ( result.isConfirmed ) {
 
-        this.walkService.deletePet( id ).subscribe({
+        this.walkService.deletePet( this.pet._id ).subscribe({
           next: () => {
             Swal.fire({
               position: 'top-end',
-              title: `Eliminaste a ${ name }!`,
+              title: `Eliminaste a ${ this.pet.name }!`,
               icon: 'success',
               timer: 1500,
               timerProgressBar: true,
@@ -82,13 +93,118 @@ export class WalkCardComponent {
           complete: () => {
             this.reloadPets.emit();
           },
-          error: (message) => {
+          error: ( message ) => {
             Swal.fire({
               title: 'Error',
-              text: message,
+              text: message.error.message,
               icon: 'error'
             });
           }
+        });
+      }
+    });
+  }
+
+  get walks() {
+    return this.walkForm.get('walks') as FormArray;
+  }
+
+  private loadWalks() {
+    this.pet.walks.forEach(( walk ) => {
+      this.walks.push( this.createWalkForm( walk ) );
+    });
+  }
+
+  private createWalkForm( walk: Walk ): FormGroup {
+    return this.fb.group({
+      date: [ walk.date, [ Validators.required, this.dateFormatValidator() ]],
+      paid: [ walk.paid ]
+    });
+  }
+
+  public addWalkForm(){
+    const newWalk = { date: '', paid: false, isNewWeek: false };
+    this.walks.push( this.createWalkForm( newWalk ) );
+  }
+
+  public removeWalk( index: number ) {
+    this.walks.removeAt( index );
+  }
+
+  public saveWalks() {
+
+    if ( this.walkForm.pristine ) {
+      this.toggleEditWalks();
+      return;
+    }
+
+    this.pet.walks = this.walkForm.value.walks;
+
+    const editPetData = {
+      name: this.pet.name,
+      comment: this.pet.comment,
+      walks: this.pet.walks
+    }
+
+    this.onEditPet( editPetData );
+    this.toggleEditWalks();
+  }
+
+  public async editPet() {
+
+    const { value: formValues } = await Swal.fire({
+      title: "Editar Mascota",
+      html: `
+        <label for="swal-petName"> Nombre </label>
+        <input id="swal-petName" class="modal-input" type="text" placeholder="Nombre Mascota" value="${ this.pet.name }">
+        <label for="swal-petComment"> Comentario </label>
+        <input id="swal-petComment" class="modal-input" type="text" placeholder="Comentario" value="${ this.pet.comment }">
+      `,
+      focusConfirm: false,
+      confirmButtonText: "Guardar",
+      preConfirm: () => {
+        return {
+          name: (<HTMLInputElement>document.getElementById("swal-petName")).value,
+          comment: (<HTMLInputElement>document.getElementById("swal-petComment")).value,
+          walks: this.pet.walks
+        };
+      }
+    });
+    if ( formValues ) {
+      this.onEditPet( formValues );
+    }
+  }
+
+  public toggleEditWalks() {
+    this.editWalks = !this.editWalks;
+    this.walkForm.reset();
+    this.walks.clear();
+    this.loadWalks();
+  }
+
+  onEditPet( formValue: UpdatePet ): void {
+    this.walkService.updatePet( this.pet._id, formValue ).subscribe({
+      next: () => {
+        Swal.fire({
+          position: 'top-end',
+          title: 'Guardado Exitoso!!',
+          icon: 'success',
+          timer: 1500,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          showClass: {
+            popup: `animate__animated animate__fadeIn`
+          }
+        });
+      },
+      complete: () => {
+        this.reloadPets.emit();
+      },
+      error: ( message ) => {
+        Swal.fire({
+          title: 'Error',
+          text: message.error.message,
+          icon: 'error'
         });
       }
     });
@@ -138,10 +254,10 @@ export class WalkCardComponent {
       complete: () => {
         this.reloadPets.emit();
       },
-      error: (message) => {
+      error: ( message ) => {
         Swal.fire({
           title: 'Error',
-          text: message,
+          text: message.error.message,
           icon: 'error'
         });
       }
@@ -177,10 +293,10 @@ export class WalkCardComponent {
       complete: () => {
         this.reloadPets.emit();
       },
-      error: (message) => {
+      error: ( message ) => {
         Swal.fire({
           title: 'Error',
-          text: message,
+          text: message.error.message,
           icon: 'error'
         });
       }
@@ -205,5 +321,17 @@ export class WalkCardComponent {
         walk.clicked = this.isCheckedButton;
       }
     });
+  }
+
+  private dateFormatValidator(): ValidatorFn {
+    return ( control: AbstractControl ): ValidationErrors | null => {
+
+      if (!control.value) {
+        return null;
+      }
+
+      const date = parse( control.value, 'dd-MM-yyyy', new Date() );
+      return isValid( date ) ? null : { invalidDateFormat: { value: control.value } };
+    };
   }
 }

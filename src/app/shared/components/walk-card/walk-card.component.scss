@@ -1,4 +1,5 @@
 @use '../../../../base/variables' as v;
+@use '../../../../base/mixins' as m;
 
 .walk-card-container {
     display: flex;
@@ -107,4 +108,135 @@
 
 .check-button {
     color: v.$secondary;
+}
+
+.edit-walks {
+    outline: 0.2rem solid v.$secondary;
+}
+
+.edit-walks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.edit-walks-check {
+    appearance: none;
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    background-color: v.$white;
+    border-radius: 0.5rem;
+    vertical-align: middle;
+    transition: background 0.1s ease;
+    border: 1px solid #d9d9d9;
+    cursor: pointer;
+
+    &:checked {
+        border-color: transparent;
+        background: v.$third;
+        animation: jelly-42 0.6s ease;
+
+        &::after {
+            opacity: 1;
+            transform: rotate(45deg) scale(1);
+        }
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0.2rem;
+        left: 0.9rem;
+        width: 1rem;
+        height: 2rem;
+        opacity: 0;
+        transform: rotate(45deg) scale(0);
+        border-right: 0.3rem solid #fff;
+        border-bottom: 0.3rem solid #fff;
+        transition: all 0.3s ease;
+        transition-delay: 0.15s;
+    }
+}
+
+.edit-walks-input {
+    height: 3rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5rem;
+    padding: 0px 0.5rem;
+    caret-color: v.$lightGrey;
+    color: v.$darkGrey;
+
+    &::placeholder {
+        color: v.$lightGrey;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.delete-walk-btn {
+    padding: 0px;
+    height: 3rem;
+    width: 3rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: v.$white;
+    color: v.$red;
+
+    @include m.desktop {
+
+        &:hover {
+            background-color: #eeeeee;
+        }
+    }
+}
+
+.walk-item {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.add-walk {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: v.$separation;
+    height: 3.5rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: v.$white;
+
+    @include m.desktop {
+
+        &:hover {
+            background-color: #eeeeee;
+        }
+    }
+}
+
+.edit-action-btn-container {
+    display: flex;
+    gap: v.$separation;
+    width: 100%;
+
+    button {
+        width: 50%;
+        outline: 0.2rem solid v.$secondary;
+        height: 3.5rem;
+        border: 1px solid #d9d9d9;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        background-color: v.$white;
+
+        @include m.desktop {
+
+            &:hover {
+                background-color: #eeeeee;
+            }
+        }
+    }
 }

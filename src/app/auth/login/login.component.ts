@@ -52,12 +52,12 @@ export class LoginComponent implements OnInit {
     this.authService.login( email, password )
       .subscribe({
         next: () => { this.router.navigateByUrl('/landing') },
-        error: (message) => {
+        error: ( message ) => {
           Swal.fire({
             position: 'top-end',
             icon: 'error',
             title: 'Error',
-            text: message,
+            text: message.error.message,
             timer: 2500,
             timerProgressBar: true,
             showConfirmButton: false,

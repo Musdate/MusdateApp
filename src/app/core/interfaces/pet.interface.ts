@@ -15,6 +15,7 @@ export interface Walk {
 }
 
 export interface UpdatePet {
+    name?    : string;
     comment? : string;
     walks?   : Walk[];
 }
