@@ -4,6 +4,7 @@ import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
 import { AuthService, WalksService } from 'src/app/core/services';
 import { EditIconComponent } from 'src/app/shared/components/Icons';
 import { PlusIconComponent } from 'src/app/shared/components/Icons/plus-icon.component';
+import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
 import { WalkCardComponent } from 'src/app/shared/components/walk-card/walk-card.component';
 import Swal from 'sweetalert2';
 
@@ -13,7 +14,8 @@ import Swal from 'sweetalert2';
   imports: [
     WalkCardComponent,
     PlusIconComponent,
-    EditIconComponent
+    EditIconComponent,
+    LoadingComponent
    ],
   templateUrl: './walks.component.html',
   styleUrl: './walks.component.scss'
@@ -25,6 +27,9 @@ export class WalksComponent implements OnInit {
 
   public allPets: Pet[];
   public walksPrice: WalksPrice;
+  public isLoading: boolean;
+  public isLoadingPets: boolean;
+  public isLoadingWalks: boolean;
 
   constructor() {
     this.allPets = [];
@@ -34,6 +39,9 @@ export class WalksComponent implements OnInit {
       fourDays: 0,
       fiveDays: 0
     };
+    this.isLoadingPets = false;
+    this.isLoadingWalks = false;
+    this.isLoading = false;
   }
 
   ngOnInit(): void {
@@ -42,14 +50,48 @@ export class WalksComponent implements OnInit {
   }
 
   loadPets() {
-    this.walkService.findAllPets( this.authService.currentUser()!._id ).subscribe( pets => this.allPets = pets );
+    this.isLoadingPets = true;
+
+    this.walkService.findAllPets( this.authService.currentUser()!._id ).subscribe({
+      next: ( pets ) => {
+        this.allPets = pets
+      },
+      error: ( message ) => {
+        Swal.fire({
+          title: 'Error',
+          text: message.error.message,
+          icon: 'error'
+        });
+      },
+      complete: () => {
+        this.isLoadingPets = false;
+      }
+    });
   }
 
   loadWalksPrice() {
-    this.walkService.findWalksPrice( this.authService.currentUser()!._id ).subscribe( walksPrice => this.walksPrice = walksPrice )
+    this.isLoadingWalks = true;
+
+    this.walkService.findWalksPrice( this.authService.currentUser()!._id ).subscribe({
+      next: ( walksPrice ) => {
+        this.walksPrice = walksPrice
+      },
+      error: ( message ) => {
+        Swal.fire({
+          title: 'Error',
+          text: message.error.message,
+          icon: 'error'
+        });
+      },
+      complete: () => {
+        this.isLoadingWalks = false;
+      }
+    })
   }
 
   onSavePet( formValue: Pet ): void {
+    this.isLoading = true;
+
     this.walkService.onSavePet( this.authService.currentUser()!._id, formValue ).subscribe({
       next: () => {
         Swal.fire({
@@ -64,20 +106,23 @@ export class WalksComponent implements OnInit {
           }
         });
       },
-      complete: () => {
-        this.loadPets();
-      },
       error: ( message ) => {
         Swal.fire({
           title: 'Error',
           text: message.error.message,
           icon: 'error'
         });
+      },
+      complete: () => {
+        this.loadPets();
+        this.isLoading = false;
       }
     });
   }
 
   onSaveWalksPrice( formValue: WalksPrice ): void {
+    this.isLoading = true;
+
     this.walkService.addWalksPrice( this.authService.currentUser()!._id , formValue ).subscribe({
       next: () => {
         Swal.fire({
@@ -92,16 +137,17 @@ export class WalksComponent implements OnInit {
           }
         });
       },
-      complete: () => {
-        this.loadWalksPrice();
-        this.loadPets();
-      },
       error: ( message ) => {
         Swal.fire({
           title: 'Error',
           text: message.error.message,
           icon: 'error'
         });
+      },
+      complete: () => {
+        this.loadWalksPrice();
+        this.loadPets();
+        this.isLoading = false;
       }
     });
   }

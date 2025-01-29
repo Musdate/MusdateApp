@@ -5,13 +5,15 @@ import { AuthService } from 'src/app/core/services';
 
 import Swal from 'sweetalert2';
 import 'animate.css';
+import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoadingComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -22,11 +24,16 @@ export class LoginComponent implements OnInit {
   private readonly authService = inject( AuthService);
   private readonly router      = inject( Router );
 
+  public isLoading: boolean;
   public loginForm: FormGroup = this.fb.group({
     email:      ['admin@gmail.com', [ Validators.required, Validators.email ]],
     password:   ['123456', [ Validators.required, Validators.minLength(6) ]],
     rememberMe: [ false ]
   });
+
+  constructor() {
+    this.isLoading = false;
+  }
 
   ngOnInit(): void {
     this.loadRememberedUser();
@@ -49,8 +56,9 @@ export class LoginComponent implements OnInit {
       localStorage.removeItem('rememberedUser');
     }
 
-    this.authService.login( email, password )
-      .subscribe({
+    this.isLoading = true;
+
+    this.authService.login( email, password ).subscribe({
         next: () => { this.router.navigateByUrl('/landing') },
         error: ( message ) => {
           Swal.fire({
@@ -65,6 +73,9 @@ export class LoginComponent implements OnInit {
               popup: `animate__animated animate__fadeIn`
             },
           });
+        },
+        complete: () => {
+          this.isLoading = false;
         }
       });
   }

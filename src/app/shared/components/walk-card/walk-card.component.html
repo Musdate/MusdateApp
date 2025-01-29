@@ -1,3 +1,7 @@
+@if ( isLoading ) {
+    <app-loading></app-loading>
+}
+
 <div class="walk-card-container">
 
     <div onKeyPress class="card" (click)="toggleData()">
@@ -47,13 +51,15 @@
                     <div> Mascota </div>
                     <icon-edit></icon-edit>
                 </button>
-                <!-- EDIT BUTTON -->
-                <button class="btn warn-btn hover-btn"
-                        [ngClass]="{'edit-walks': editWalks}"
-                        (click)="toggleEditWalks()">
-                    <div> Fechas </div>
-                    <icon-edit></icon-edit>
-                </button>
+                @if ( pet.walks.length > 0 ) {
+                    <!-- EDIT BUTTON -->
+                    <button class="btn warn-btn hover-btn"
+                            [ngClass]="{'edit-walks': editWalks}"
+                            (click)="toggleEditWalks()">
+                        <div> Fechas </div>
+                        <icon-edit></icon-edit>
+                    </button>
+                }
             </div>
 
             @if ( pet.walks.length > 0 ) {

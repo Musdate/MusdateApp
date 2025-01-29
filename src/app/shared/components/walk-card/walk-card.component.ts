@@ -8,6 +8,7 @@ import { AuthService, WalksService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
 import { CheckIconComponent, DeleteIconComponent, DollarIconComponent, EditIconComponent, PdfIconComponent, PlusIconComponent, WalksIconComponent } from '../Icons';
 import generatePDF from '../libs/walks-pdf';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'app-walk-card',
@@ -22,7 +23,8 @@ import generatePDF from '../libs/walks-pdf';
     PlusIconComponent,
     CurrencyPipe,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoadingComponent
    ],
   templateUrl: './walk-card.component.html',
   styleUrl: './walk-card.component.scss'
@@ -42,6 +44,7 @@ export class WalkCardComponent {
   public todayDate: string;
   public isCheckedButton: boolean;
   public editWalks: boolean;
+  public isLoading: boolean;
   public walkForm: FormGroup;
 
   constructor() {
@@ -49,6 +52,7 @@ export class WalkCardComponent {
     this.todayDate = '';
     this.isCheckedButton = false;
     this.editWalks = false;
+    this.isLoading = false;
     this.walkForm = this.fb.group({
       walks: this.fb.array([])
     });
@@ -74,6 +78,7 @@ export class WalkCardComponent {
       }
     }).then(( result ) => {
       if ( result.isConfirmed ) {
+        this.isLoading = true;
 
         this.walkService.deletePet( this.pet._id ).subscribe({
           next: () => {
@@ -90,15 +95,16 @@ export class WalkCardComponent {
               didClose: () => window.scrollTo({ top: 0 })
             });
           },
-          complete: () => {
-            this.reloadPets.emit();
-          },
           error: ( message ) => {
             Swal.fire({
               title: 'Error',
               text: message.error.message,
               icon: 'error'
             });
+          },
+          complete: () => {
+            this.reloadPets.emit();
+            this.isLoading = false;
           }
         });
       }
@@ -182,7 +188,9 @@ export class WalkCardComponent {
     this.loadWalks();
   }
 
-  onEditPet( formValue: UpdatePet ): void {
+   private onEditPet( formValue: UpdatePet ): void {
+    this.isLoading = true;
+
     this.walkService.updatePet( this.pet._id, formValue ).subscribe({
       next: () => {
         Swal.fire({
@@ -197,15 +205,16 @@ export class WalkCardComponent {
           }
         });
       },
-      complete: () => {
-        this.reloadPets.emit();
-      },
       error: ( message ) => {
         Swal.fire({
           title: 'Error',
           text: message.error.message,
           icon: 'error'
         });
+      },
+      complete: () => {
+        this.reloadPets.emit();
+        this.isLoading = false;
       }
     });
   }
@@ -237,6 +246,8 @@ export class WalkCardComponent {
       paid: false
     }
 
+    this.isLoading = true;
+
     this.walkService.addWalk( this.pet._id, addWalkData ).subscribe({
       next: () => {
         Swal.fire({
@@ -251,15 +262,16 @@ export class WalkCardComponent {
           }
         });
       },
-      complete: () => {
-        this.reloadPets.emit();
-      },
       error: ( message ) => {
         Swal.fire({
           title: 'Error',
           text: message.error.message,
           icon: 'error'
         });
+      },
+      complete: () => {
+        this.reloadPets.emit();
+        this.isLoading = false;
       }
     });
   }
@@ -276,6 +288,8 @@ export class WalkCardComponent {
       walks: this.pet.walks.map( ({ clicked, ...rest }) => rest )
     }
 
+    this.isLoading = true;
+
     this.walkService.updatePet( this.pet._id, updatePetData ).subscribe({
       next: () => {
         Swal.fire({
@@ -290,15 +304,16 @@ export class WalkCardComponent {
           }
         });
       },
-      complete: () => {
-        this.reloadPets.emit();
-      },
       error: ( message ) => {
         Swal.fire({
           title: 'Error',
           text: message.error.message,
           icon: 'error'
         });
+      },
+      complete: () => {
+        this.reloadPets.emit();
+        this.isLoading = false;
       }
     });
   }

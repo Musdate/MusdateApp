@@ -2,11 +2,12 @@ import { Component, computed, effect, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthStatus } from './core/interfaces';
 import { AuthService } from './core/services';
+import { LoadingComponent } from './shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [ RouterOutlet, LoadingComponent ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
