@@ -1,25 +1,33 @@
+@if ( isLoading ) {
+    <app-loading></app-loading>
+}
+
 <div class="container layout">
 
-    <!-- <form> -->
-    <div>
+    <form [formGroup]="userForm" (ngSubmit)="register()">
 
         <input  class="input"
+                [ngClass]="{'error-input': errorFields['name']}"
                 type="text"
+                formControlName="name"
                 placeholder="Username">
 
         <input  class="input"
+                [ngClass]="{'error-input': errorFields['email']}"
                 type="email"
+                formControlName="email"
                 placeholder="Email">
 
         <input  class="input"
+                [ngClass]="{'error-input': errorFields['password']}"
                 type="password"
+                formControlName="password"
                 placeholder="Password">
 
-        <button (click)="register()"> REGISTER </button>
+        <button type="submit"> REGISTER </button>
 
         <a [routerLink]="['/login']"> Login </a>
 
-    </div>
-    <!-- </form> -->
+    </form>
 
 </div>

@@ -58,5 +58,8 @@
             color: v.$third;
         }
     }
+}
 
+.error-input {
+    outline: 2px solid v.$red;
 }

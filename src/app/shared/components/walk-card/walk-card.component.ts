@@ -231,7 +231,7 @@ export class WalkCardComponent {
           position: 'top-end',
           title: `Ya has paseado a ${ this.pet.name } hoy!!`,
           icon: 'warning',
-          timer: 1500,
+          timer: 2000,
           timerProgressBar: true,
           showConfirmButton: false,
           showClass: {
@@ -256,7 +256,7 @@ export class WalkCardComponent {
           position: 'top-end',
           title: `Has paseado a ${ this.pet.name }!!`,
           icon: 'success',
-          timer: 1500,
+          timer: 2000,
           timerProgressBar: true,
           showConfirmButton: false,
           showClass: {
@@ -297,7 +297,7 @@ export class WalkCardComponent {
       next: () => {
         Swal.fire({
           position: 'top-end',
-          title: `Pagos pendientes actualizados.`,
+          title: `Pagos actualizados.`,
           icon: 'success',
           timer: 1500,
           timerProgressBar: true,

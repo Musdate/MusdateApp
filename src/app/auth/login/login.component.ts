@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login( email, password ).subscribe({
       next: () => {
-        this.router.navigateByUrl('/landing')
+        this.router.navigateByUrl('/landing');
       },
       error: ( message ) => {
         Swal.fire({
