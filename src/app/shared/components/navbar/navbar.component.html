@@ -6,6 +6,7 @@
             <div> Memories </div>
         </a>
         <a [routerLink]="['recipes']" routerLinkActive="active-link" class="nav-item">Recetas</a>
+        <a class="nav-item">Minuta</a>
         <a class="nav-item">Mangas</a>
         <a class="nav-item">Peliculas</a>
         <a [routerLink]="['walks']" routerLinkActive="active-link" class="nav-item">Paseos</a>
@@ -35,6 +36,11 @@
         <a [routerLink]="['recipes']" routerLinkActive="active-link" (click)="toogleSidebar()">
             <icon-recipes></icon-recipes>
             <div> Recetas </div>
+        </a>
+
+        <a>
+            <icon-walks></icon-walks>
+            <div> Minuta </div>
         </a>
 
         <a>

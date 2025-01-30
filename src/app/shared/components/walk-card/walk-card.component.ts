@@ -140,7 +140,7 @@ export class WalkCardComponent {
 
   public saveWalks() {
 
-    if ( this.walkForm.pristine ) {
+    if ( this.walkForm.pristine && ( this.walkForm.value.walks.lenght === this.pet.walks.length ) ) {
       this.toggleEditWalks();
       return;
     }
