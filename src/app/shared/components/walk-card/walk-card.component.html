@@ -2,20 +2,20 @@
     <app-loading></app-loading>
 }
 
-<div class="walk-card-container">
+<div class="walk-card-container flex-center">
 
     <div onKeyPress class="card" (click)="toggleData()">
 
-        <div class="name-pet">
+        <div class="name-pet flex-center">
             <div> {{ pet.name }} </div>
         </div>
 
-        <div class="pet-comment"> {{ pet.comment }} </div>
+        <div class="pet-comment flex-center"> {{ pet.comment }} </div>
 
     </div>
 
     @if ( cardExpanded ) {
-        <div class="pet-info">
+        <div class="pet-info flex-center">
 
             <div class="btn-container">
                 @if ( pet.walks.length > 0 ) {
@@ -64,7 +64,7 @@
 
             @if ( pet.walks.length > 0 ) {
 
-                <div class="walks-section" [ngClass]="{'edit-walks': editWalks}">
+                <div class="walks-section flex-center" [ngClass]="{'edit-walks': editWalks}">
 
                     <div class="date-container">
 
@@ -85,9 +85,9 @@
                                             <input type="text"
                                                 formControlName="date"
                                                 placeholder="00-00-0000"
-                                                class="edit-walks-input">
+                                                class="edit-walks-input edit-walk-btn">
 
-                                            <button class="delete-walk-btn hover-btn" (click)="removeWalk( index )">
+                                            <button class="delete-walk-btn edit-walk-btn" (click)="removeWalk( index )">
                                                 <icon-delete></icon-delete>
                                             </button>
 
@@ -95,7 +95,7 @@
 
                                     }
 
-                                    <button type="button" (click)="addWalkForm()" class="add-walk hover-btn">
+                                    <button type="button" (click)="addWalkForm()" class="add-walk edit-walk-btn flex-center">
                                         <div> Agregar Fecha </div>
                                         <icon-plus></icon-plus>
                                     </button>
@@ -158,8 +158,8 @@
                 @if ( editWalks ) {
 
                     <div  class="edit-action-btn-container">
-                        <button type="button" (click)="saveWalks()" [disabled]="!walkForm.valid"> Guardar</button>
-                        <button type="button" (click)="toggleEditWalks()"> Cancelar </button>
+                        <button type="button" class="edit-action-btn edit-walk-btn" (click)="saveWalks()" [disabled]="!walkForm.valid"> Guardar</button>
+                        <button type="button" class="edit-action-btn edit-walk-btn" (click)="toggleEditWalks()"> Cancelar </button>
                     </div>
 
                 }

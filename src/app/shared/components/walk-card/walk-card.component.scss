@@ -2,8 +2,6 @@
 @use '../../../../base/mixins' as m;
 
 .walk-card-container {
-    display: flex;
-    align-items: center;
     flex-direction: column;
     gap: v.$separation;
 }
@@ -19,25 +17,18 @@
 }
 
 .name-pet {
-    display: flex;
-    justify-content: center;
     font-size: 2rem;
     font-weight: 500;
     padding: 1rem;
 }
 
 .pet-comment {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: v.$midGrey;
     padding: 0px v.$separation;
 }
 
 .pet-info {
-    display: flex;
     flex-direction: column;
-    align-items: center;
     gap: v.$separation;
 }
 
@@ -47,9 +38,7 @@
 }
 
 .walks-section {
-    display: flex;
     flex-direction: column;
-    align-items: center;
     max-height: 30rem;
     max-width: 35rem;
     background-color: v.$white;
@@ -59,8 +48,8 @@
 
 .date-container {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
     width: 100%;
     padding: 0px v.$separation;
     margin: v.$separation 0px;
@@ -161,8 +150,6 @@
 
 .edit-walks-input {
     height: 3rem;
-    border: 1px solid #d9d9d9;
-    border-radius: 0.5rem;
     padding: 0px 0.5rem;
     caret-color: v.$lightGrey;
     color: v.$darkGrey;
@@ -180,18 +167,7 @@
     padding: 0px;
     height: 3rem;
     width: 3rem;
-    border: 1px solid #d9d9d9;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    background-color: v.$white;
     color: v.$red;
-
-    @include m.desktop {
-
-        &:hover {
-            background-color: #eeeeee;
-        }
-    }
 }
 
 .walk-item {
@@ -200,43 +176,36 @@
 }
 
 .add-walk {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: v.$separation;
     height: 3.5rem;
-    border: 1px solid #d9d9d9;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    background-color: v.$white;
-
-    @include m.desktop {
-
-        &:hover {
-            background-color: #eeeeee;
-        }
-    }
 }
 
 .edit-action-btn-container {
     display: flex;
     gap: v.$separation;
     width: 100%;
+}
 
-    button {
-        width: 50%;
-        outline: 0.2rem solid v.$secondary;
-        height: 3.5rem;
-        border: 1px solid #d9d9d9;
-        border-radius: 0.5rem;
-        cursor: pointer;
-        background-color: v.$white;
+.edit-action-btn {
+    width: 50%;
+    outline: 0.2rem solid v.$secondary;
+    height: 3.5rem;
 
-        @include m.desktop {
+    &:disabled {
+        pointer-events: none;
+    }
+}
 
-            &:hover {
-                background-color: #eeeeee;
-            }
+.edit-walk-btn {
+    border: 1px solid #d9d9d9;
+    border-radius: 0.5rem;
+    background-color: v.$white;
+    cursor: pointer;
+
+    @include m.desktop {
+
+        &:hover {
+            background-color: #eeeeee;
         }
     }
 }
