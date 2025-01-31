@@ -7,6 +7,12 @@ export interface Pet {
     pendingPrice : number;
 }
 
+export interface UpdatePet {
+    name?    : string;
+    comment? : string;
+    walks?   : Walk[];
+}
+
 export interface Walk {
     date      : string;
     isNewWeek : boolean;
@@ -14,8 +20,10 @@ export interface Walk {
     clicked?  : boolean;
 }
 
-export interface UpdatePet {
-    name?    : string;
-    comment? : string;
-    walks?   : Walk[];
+export interface WalksPrice {
+    _id?      : string;
+    oneDay    : number;
+    threeDays : number;
+    fourDays  : number;
+    fiveDays  : number;
 }

@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environments';
-import { Pet, UpdatePet, Walk } from '../interfaces/pet.interface';
+import { Pet, UpdatePet, Walk, WalksPrice } from '../interfaces';
 import { Observable } from 'rxjs';
-import { WalksPrice } from '../interfaces/walks-price.interface';
 
 @Injectable({
   providedIn: 'root'

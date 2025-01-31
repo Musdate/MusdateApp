@@ -16,10 +16,15 @@
     align-items: center;
 }
 
+.content-page {
+    padding: 10rem 0px 3rem 0px;
+}
+
 
 // SWALFIRE 2 MODAL
 .swal2-modal {
     min-width: fit-content;
+    padding: 0px 1rem 2rem 1rem;
 
     .swal2-title {
         font-size: 2.4rem;
@@ -32,26 +37,14 @@
         align-items: flex-start;
 
         .modal-input {
-            width: 27.5rem;
+
+            @include m.input( 27.5rem, 4.5rem, 0px 1rem, 1rem, v.$borderInput );
             margin: 0.2rem 0px 1rem 0px;
-            padding: 0px 1rem;
-            height: 4.5rem;
-            border-radius: 1rem;
-            background: v.$white;
-            color: v.$darkGrey;
-            caret-color: v.$lightGrey;
             box-sizing: border-box;
             transition: box-shadow 0.1s;
-            border: 1px solid #d9d9d9;
             box-shadow: inset 0 1px 1px rgba(0,0,0,.06),0 0 0 3px rgba(0,0,0,0);
 
-            &::placeholder {
-                color: v.$lightGrey;
-            }
-
             &:focus {
-                border: unset;
-                outline: none;
                 box-shadow: inset 0 1px 1px
                 rgba(0, 0, 0, 0.05),
                 0 0 0 3px
@@ -91,39 +84,24 @@
 
     .swal2-actions {
         gap: v.$separation;
-
-        .swal2-confirm,
-        .swal2-cancel {
-            width: 15rem;
-            height: 4.5rem;
-            margin: 0px 0px 1.5rem 0px;
-            font-size: 1.5rem;
-            background-color: v.$third;
-            text-decoration: none;
-            border: none;
-            outline: none;
-            color: v.$white;
-            border-radius: 1rem;
-            transition: background-color .3s ease;
-            box-shadow: v.$cardShadow;
-        }
+        width: 100%;
+        font-size: 1.5rem;
+        flex-direction: row-reverse;
 
         .swal2-confirm {
+            all: unset;
+            @extend .primary-btn;
+            width: 20rem !important;
+            text-align: center;
             background-color: v.$third;
-
-            &:hover {
-                cursor: pointer;
-                background-color: lighten(v.$third, 5);
-            }
         }
 
         .swal2-cancel {
-            background-color: v.$red;
-
-            &:hover {
-                cursor: pointer;
-                background-color: lighten(v.$red, 5);
-            }
+            all: unset;
+            @extend .primary-btn;
+            width: 20rem !important;
+            text-align: center;
+            background-color: v.$red !important;
         }
     }
 }
@@ -136,6 +114,10 @@
     color: v.$darkGrey;
     font-size: 2rem;
     font-weight: 500;
+}
+
+.error-input {
+    outline: 2px solid v.$red;
 }
 
 // BUTTONS
@@ -153,6 +135,31 @@
 
     div {
         margin: 0px 0.5rem;
+    }
+}
+
+.primary-btn {
+    width: 100%;
+    height: 5rem;
+    font-weight: 700;
+    background-color: v.$third;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    color: v.$white;
+    border-radius: 1rem;
+    transition: background-color .3s ease;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+                rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: lighten(v.$third, 5);
+    }
+
+    &:disabled {
+        cursor: default;
+        background-color: v.$lightGrey;
     }
 }
 
@@ -178,7 +185,7 @@
     color: v.$secondary;
 }
 
-.primary-btn {
+.primary-btn-color {
     color: v.$third;
 }
 

@@ -3,13 +3,17 @@ import { format } from "date-fns";
 import { es } from 'date-fns/locale/es';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import { Pet } from "src/app/core/interfaces/pet.interface";
+import { Pet } from "src/app/core/interfaces/walk.interface";
 import { LogoLadriaventuras } from "../../../../assets/LogoLadriaventuras";
+import { User } from "src/app/core/interfaces";
 
 (pdfMake as any).vfs = pdfFonts.vfs;
 
-const generatePDF = ( pet: Pet, userName: string ) => {
+const generatePDF = ( pet: Pet, user: User | null ) => {
 
+    const userName = user?.name;
+    const bColombia = user?.banks.find(( bank ) => bank.name === 'Bancolombia' )?.number;
+    const bNequi = user?.banks.find(( bank ) => bank.name === 'Nequi' )?.number;
     const currencyPipe = new CurrencyPipe('en-US');
     const date = new Date();
     let formatedLongDate = format( date, "EEEE dd 'de' MMMM, yyyy", { locale: es } );
@@ -75,22 +79,26 @@ const generatePDF = ( pet: Pet, userName: string ) => {
                         alignment: "left",
                         margin: [ 10, 0, 0, 0 ]
                     },
-                    {
-                        text: [
-                            { text: 'Bancolombia: ', style: "header" },
-                            { text: '816-338699-52', style: "subheader" }
-                        ],
-                        alignment: "left",
-                        margin: [ 10, 0, 0, 0 ]
-                    },
-                    {
-                        text: [
-                            { text: 'Nequi: ', style: "header" },
-                            { text: '3104848848', style: "subheader" }
-                        ],
-                        alignment: "left",
-                        margin: [ 10, 0, 0, 0 ]
-                    },
+                    ...( bColombia ? [
+                        {
+                            text: [
+                                { text: 'Bancolombia: ', style: "header" },
+                                { text: bColombia, style: "subheader" }
+                            ],
+                            alignment: "left",
+                            margin: [ 10, 0, 0, 0 ]
+                        }
+                    ] : []),
+                    ...( bNequi ? [
+                        {
+                            text: [
+                                { text: 'Nequi: ', style: "header" },
+                                { text: bNequi, style: "subheader" }
+                            ],
+                            alignment: "left",
+                            margin: [ 10, 0, 0, 0 ]
+                        }
+                    ] : [])
                 ],
             },
         ],

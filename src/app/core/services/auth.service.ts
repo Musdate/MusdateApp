@@ -6,9 +6,10 @@ import { environment } from 'src/environments/environments';
 import {
   AuthStatus,
   CheckTokenResponse,
+  CreateUser,
   LoginResponse,
+  UpdateUser,
   User } from '../interfaces';
-import { CreateUser } from '../interfaces/create-user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +62,17 @@ export class AuthService {
     return this.http.post<LoginResponse>( url, user ).pipe(
       map(({ user, token }) => this.setAuthentication( user, token )),
       catchError(( err ) => throwError(() => err.error.message ))
+    );
+  }
+
+  updateUser( userId: string, body: UpdateUser ): Observable<User> {
+    const url = `${ this.baseUrl }/auth/updateUser/${ userId }`;
+    return this.http.patch<User>( url, body ).pipe(
+      map(( updatedUser ) => {
+        this._currentUser.set( updatedUser);
+        return updatedUser;
+      }),
+      catchError(( error ) => throwError(() => error.error.message ))
     );
   }
 

@@ -1,6 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Pet } from 'src/app/core/interfaces/pet.interface';
-import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
+import { Pet, WalksPrice } from 'src/app/core/interfaces';
 import { AuthService, WalksService } from 'src/app/core/services';
 import { EditIconComponent } from 'src/app/shared/components/Icons';
 import { PlusIconComponent } from 'src/app/shared/components/Icons/plus-icon.component';
@@ -165,12 +164,16 @@ export class WalksComponent implements OnInit {
       title: "Agregar Mascota",
       html: `
         <label for="swal-petName"> Nombre </label>
-        <input id="swal-petName" class="modal-input" type="text" placeholder="Nombre Mascota">
+        <input id="swal-petName" class="modal-input" type="text" placeholder="Nombre Mascota" autocomplete="off">
         <label for="swal-petComment"> Comentario </label>
-        <input id="swal-petComment" class="modal-input" type="text" placeholder="Comentario">
+        <input id="swal-petComment" class="modal-input" type="text" placeholder="Comentario" autocomplete="off">
       `,
       focusConfirm: false,
       confirmButtonText: "Guardar",
+      customClass: {
+        confirmButton: "primary-btn",
+        cancelButton: "primary-btn"
+      },
       preConfirm: () => {
         return {
           name: (<HTMLInputElement>document.getElementById("swal-petName")).value,
@@ -201,6 +204,10 @@ export class WalksComponent implements OnInit {
         `,
       focusConfirm: false,
       confirmButtonText: "Guardar",
+      customClass: {
+        confirmButton: "primary-btn",
+        cancelButton: "primary-btn"
+      },
       preConfirm: () => {
         return {
           oneDay: parseInt((<HTMLInputElement>document.getElementById("swal-oneDay")).value) || 0,

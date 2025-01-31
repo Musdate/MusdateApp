@@ -5,52 +5,20 @@
     width: 27.5rem;
 
     input {
-        margin: 0 0 5rem 0;
-        padding: 0 1.5rem;
-        width: 100%;
-        height: 4.5rem;
-        background: v.$white;
-        border: none;
-        border-radius: 1rem;
-        color: v.$darkGrey;
-        caret-color: v.$lightGrey;
+
+        @include m.input( 100%, 4.5rem, 0px 1.5rem, 1rem , none );
+
+        margin: 0px 0px 5rem 0px;
 
         &::placeholder {
-            color: v.$lightGrey;
             font-style: italic;
         }
-
-        &:focus {
-            outline: none;
-        }
-    }
-
-    button {
-        width: 100%;
-        height: 5rem;
-        margin: 0 0 5rem 0;
-        font-weight: 700;
-        background-color: v.$third;
-        text-decoration: none;
-        border: none;
-        outline: none;
-        color: v.$white;
-        border-radius: 1rem;
-        transition: background-color .3s ease;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-                    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-
-        &:hover {
-            cursor: pointer;
-            background-color: lighten(v.$third, 5);
-        }
-
     }
 
     a {
         display: block;
         text-align: center;
-        margin: 0 0 2.5rem 0;
+        margin: 5rem 0px 2.5rem 0px;
         cursor: pointer;
         color: v.$white;
 
@@ -58,8 +26,4 @@
             color: v.$third;
         }
     }
-}
-
-.error-input {
-    outline: 2px solid v.$red;
 }

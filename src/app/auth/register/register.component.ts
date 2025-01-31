@@ -34,7 +34,11 @@ export class RegisterComponent {
     this.userForm = this.fb.group({
       name     : [ '', [ Validators.required ]],
       email    : [ '', [ Validators.required, Validators.email ]],
-      password : [ '', [ Validators.required, Validators.minLength(6) ]]
+      password : [ '', [ Validators.required, Validators.minLength(6) ]],
+      banks    : [[
+        { name: 'Bancolombia', number: '' },
+        { name: 'Nequi', number: '' }
+      ]]
     });
   }
 
@@ -62,7 +66,7 @@ export class RegisterComponent {
         error: ( message ) => {
           Swal.fire({
             title: 'Error',
-            text: message.error.message,
+            text: message,
             icon: 'error'
           });
           this.isLoading = false;
@@ -99,24 +103,24 @@ export class RegisterComponent {
       this.errorFields.email = true;
 
       if ( this.userForm.controls['email'].hasError('required') ) {
-        htmlError += '<div> Email es requerido </div>'
+        htmlError += '<div> Email es requerido </div>';
       }
       if ( this.userForm.controls['email'].hasError('email') ) {
-        htmlError += '<div> Email invalido </div>'
+        htmlError += '<div> Email invalido </div>';
       }
     }
     if ( this.userForm.controls['password'].errors ) {
       this.errorFields.password = true;
 
       if ( this.userForm.controls['password'].hasError('required') ) {
-        htmlError += '<div> Password es requerido </div>'
+        htmlError += '<div> Password es requerido </div>';
       }
       if ( this.userForm.controls['password'].hasError('minlength') ) {
-        htmlError += '<div> Password debe ser de mínimo 6 caracteres </div>'
+        htmlError += '<div> Password debe ser de mínimo 6 caracteres </div>';
       }
     }
 
-    htmlError += '</div>'
+    htmlError += '</div>';
 
     return htmlError;
   }

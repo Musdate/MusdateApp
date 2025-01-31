@@ -20,8 +20,27 @@
 }
 
 // Elements
-@mixin grid($columns, $spacing ) {
+@mixin grid( $columns, $spacing ) {
     display: grid;
     gap: $spacing;
     grid-template-columns: repeat($columns, 1fr);
+}
+
+@mixin input( $width, $height, $padding, $border-radius, $border ) {
+    width: $width;
+    height: $height;
+    padding: $padding;
+    border-radius: $border-radius;
+    border: $border;
+    background: v.$white;
+    color: v.$darkGrey;
+    caret-color: v.$lightGrey;
+
+    &::placeholder {
+        color: v.$lightGrey;
+    }
+
+    &:focus {
+        outline: none;
+    }
 }

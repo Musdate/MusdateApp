@@ -74,12 +74,22 @@
 
     @include m.tablet {
         display: flex;
+        align-items: center;
+        gap: 0.5rem;
         color: v.$white;
 
         &:hover {
             color: v.$third;
         }
     }
+}
+
+.separation-item {
+    height: 3.6rem;
+    width: 0.2rem;
+    background-color: v.$white;
+    border-radius: 1rem;
+    cursor: default !important;
 }
 
 .left-navbar,
@@ -94,8 +104,7 @@
 }
 
 .active-link {
-    color: v.$third;
-    font-weight: bold;
+    color: v.$third !important;
 }
 
 .config {

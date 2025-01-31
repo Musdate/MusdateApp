@@ -2,8 +2,7 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { isValid, parse } from 'date-fns';
-import { Pet, UpdatePet, Walk } from 'src/app/core/interfaces/pet.interface';
-import { WalksPrice } from 'src/app/core/interfaces/walks-price.interface';
+import { Pet, UpdatePet, Walk, WalksPrice } from 'src/app/core/interfaces';
 import { AuthService, WalksService } from 'src/app/core/services';
 import Swal from 'sweetalert2';
 import { CheckIconComponent, DeleteIconComponent, DollarIconComponent, EditIconComponent, PdfIconComponent, PlusIconComponent, WalksIconComponent } from '../Icons';
@@ -118,7 +117,7 @@ export class WalkCardComponent {
 
   private loadWalks() {
     this.pet.walks.forEach(( walk ) => {
-      this.walks.push( this.createWalkForm( walk ) );
+      this.walks.push( this.createWalkForm( walk ));
     });
   }
 
@@ -324,7 +323,7 @@ export class WalkCardComponent {
 
   public exportPdf(): void {
     const pet = this.pet;
-    generatePDF( pet, this.authService.currentUser()!.name );
+    generatePDF( pet, this.authService.currentUser() );
   }
 
   public toggleClickWalk( walk: Walk ): void {

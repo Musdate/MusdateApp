@@ -149,18 +149,7 @@
 }
 
 .edit-walks-input {
-    height: 3rem;
-    padding: 0px 0.5rem;
-    caret-color: v.$lightGrey;
-    color: v.$darkGrey;
-
-    &::placeholder {
-        color: v.$lightGrey;
-    }
-
-    &:focus {
-        outline: none;
-    }
+    @include m.input( unset, 3rem, 0px 0.5rem, 0.5rem, v.$borderInput );
 }
 
 .delete-walk-btn {

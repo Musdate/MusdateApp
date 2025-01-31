@@ -26,7 +26,7 @@
             <label for="rememberMe"> Remember me </label>
         </div>
 
-        <button type="submit" [disabled]="loginForm.invalid"> LOGIN </button>
+        <button type="submit" class="primary-btn" [disabled]="loginForm.invalid"> LOGIN </button>
 
         <a [routerLink]="['/reset-password']">Forgot Password?</a>
         <a [routerLink]="['/register']">Create Account</a>

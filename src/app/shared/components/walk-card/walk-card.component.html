@@ -31,7 +31,7 @@
                     </button>
                 }
                 <!-- WALK BUTTON -->
-                <button class="btn primary-btn hover-btn" (click)="addWalkPet()">
+                <button class="btn primary-btn-color hover-btn" (click)="addWalkPet()">
                     <icon-walks></icon-walks>
                 </button>
                 @if ( pet.walks.length > 0 ) {
@@ -85,7 +85,7 @@
                                             <input type="text"
                                                 formControlName="date"
                                                 placeholder="00-00-0000"
-                                                class="edit-walks-input edit-walk-btn">
+                                                class="edit-walks-input">
 
                                             <button class="delete-walk-btn edit-walk-btn" (click)="removeWalk( index )">
                                                 <icon-delete></icon-delete>
@@ -117,9 +117,9 @@
                                 }
 
                                 <div onKeyPress
-                                        class="walk-date"
-                                        [ngClass]="{ 'paid-walk': walk.paid, 'selected-walk': walk.clicked }"
-                                        (click)="!walk.paid && toggleClickWalk( walk )">
+                                    class="walk-date"
+                                    [ngClass]="{ 'paid-walk': walk.paid, 'selected-walk': walk.clicked }"
+                                    (click)="!walk.paid && toggleClickWalk( walk )">
 
                                     {{ walk.date }}
 
@@ -158,8 +158,8 @@
                 @if ( editWalks ) {
 
                     <div  class="edit-action-btn-container">
-                        <button type="button" class="edit-action-btn edit-walk-btn" (click)="saveWalks()" [disabled]="!walkForm.valid"> Guardar</button>
                         <button type="button" class="edit-action-btn edit-walk-btn" (click)="toggleEditWalks()"> Cancelar </button>
+                        <button type="button" class="edit-action-btn edit-walk-btn" (click)="saveWalks()" [disabled]="!walkForm.valid"> Guardar </button>
                     </div>
 
                 }
