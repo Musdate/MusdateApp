@@ -7,11 +7,11 @@ import {
   MenuIconComponent,
   CloseIconComponent,
   MangasIconComponent,
-  RecipesIconComponent,
   MoviesIconComponent,
   WalksIconComponent,
   SettingsIconComponent
 } from '../Icons';
+import { HomeIconComponent } from '../Icons/home-icon.component';
 
 @Component({
   selector: 'app-navbar',
@@ -21,11 +21,11 @@ import {
     LogoutIconComponent,
     MenuIconComponent,
     CloseIconComponent,
-    RecipesIconComponent,
     MangasIconComponent,
     MoviesIconComponent,
     WalksIconComponent,
     SettingsIconComponent,
+    HomeIconComponent,
     RouterModule
    ],
   templateUrl: './navbar.component.html',

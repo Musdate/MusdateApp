@@ -82,7 +82,6 @@ export class SettingsComponent implements OnInit {
         },
         complete: () => {
           this.isLoading = false;
-          console.log(this.authService.currentUser());
         }
       });
 

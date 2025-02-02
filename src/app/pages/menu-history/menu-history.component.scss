@@ -1,0 +1,18 @@
+@use '../../../base/variables' as v;
+
+.menu-history-container {
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.menu-history-item {
+    height: 3rem;
+    background-color: v.$olive;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    color: v.$white;
+    min-width: 27rem;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: v.$cardShadow;
+}

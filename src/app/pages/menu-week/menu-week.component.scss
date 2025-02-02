@@ -1,0 +1,63 @@
+@use '../../../base/variables' as v;
+@use '../../../base/mixins' as m;
+
+.days-menu-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1rem;
+    color: v.$white;
+    font-size: 2rem;
+
+    .day-item {
+        height: 15rem;
+        background-color: v.$olive;
+        color: v.$white;
+        cursor: pointer;
+        text-align: center;
+        border-radius: 1rem;
+        box-shadow: v.$cardShadow;
+    }
+
+    @include m.tablet {
+        gap: 2rem;
+        grid-template-columns: repeat(3, minmax(20rem, 1fr));
+
+        .day-item {
+            height: 20rem;
+        }
+    }
+}
+
+.header-menu-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1rem;
+    margin: 0px 0px 2rem 0px;
+    font-size: 2rem;
+
+    .header-menu-item {
+        height: 15rem;
+        border-radius: 1rem;
+        background-color: v.$olive;
+        color: v.$white;
+        cursor: pointer;
+        box-shadow: v.$cardShadow;
+        text-align: center;
+        padding: 1rem;
+
+    }
+
+    @include m.tablet {
+        font-size: 2.5rem;
+        gap: 2rem;
+
+        .header-menu-item {
+            height: 20rem;
+        }
+    }
+
+    @include m.desktop {
+        font-size: 3rem;
+    }
+}

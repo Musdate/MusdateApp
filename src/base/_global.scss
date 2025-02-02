@@ -17,7 +17,15 @@
 }
 
 .content-page {
-    padding: 10rem 0px 3rem 0px;
+    padding: 7rem 0rem 0rem 0rem;
+
+    > * {
+        width: 100%;
+    }
+
+    router-outlet {
+        width: unset;
+    }
 }
 
 
@@ -194,6 +202,59 @@
 }
 
 
+// MENU
+.menu-breadcrum-container {
+    display: flex;
+    justify-content: flex-start;
+    margin: 0px 0px 2rem 0px;
+    min-height: 3.6rem;
+}
+
+.menu-breadcrumb {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 3.6rem;
+    padding: 0px 1rem;
+    color: v.$white;
+    background-color: v.$olive;
+    width: calc(100% - 2.2rem);
+    font-size: 2rem;
+    border-radius: 1rem 5rem 5rem 1rem;
+    box-shadow: v.$cardShadow;
+    position: relative;
+
+    a {
+        color: v.$white;
+
+        &:hover {
+            color: v.$third;
+        }
+    }
+
+    @include m.tablet{
+        width: 75%;
+    }
+}
+
+
+// ICONS
+.home-click-icon {
+    height: 3.5rem;
+    width: 3.5rem;
+
+    @include m.phone {
+        height: 4rem;
+        width: 4rem;
+    }
+
+    @include m.tablet {
+        height: 5rem;
+        width: 5rem;
+    }
+}
+
+
 // ANIMACIONES
 @keyframes jelly-42 {
     from {
@@ -227,3 +288,4 @@
         transform: rotate(360deg);
     }
 }
+

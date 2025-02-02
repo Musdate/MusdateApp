@@ -1,15 +1,23 @@
 <nav class="navbar" aria-label="Barra de navegación.">
 
     <div class="left-navbar">
+
         <a [routerLink]="['/landing']" class="logo-item">
             <img src="../../../assets/LogoMemories_100x100.png" alt="Logo Memories" width="50" height="50">
             <div> Memories </div>
         </a>
-        <a [routerLink]="['recipes']" routerLinkActive="active-link" class="nav-item">Recetas</a>
-        <a class="nav-item"> Minuta </a>
+
+        <a [routerLink]="['home']" routerLinkActive="active-link" class="nav-item">
+            Hogar
+        </a>
+
         <a class="nav-item"> Mangas </a>
         <a class="nav-item"> Peliculas </a>
-        <a [routerLink]="['walks']" routerLinkActive="active-link"  class="nav-item">Paseos</a>
+
+        <a [routerLink]="['walks']" routerLinkActive="active-link" class="nav-item">
+            Paseos
+        </a>
+
     </div>
 
     <div class="right-navbar">
@@ -37,14 +45,9 @@
             <icon-close></icon-close>
         </span>
 
-        <a [routerLink]="['recipes']" routerLinkActive="active-link" (click)="toogleSidebar()">
-            <icon-recipes></icon-recipes>
-            <div> Recetas </div>
-        </a>
-
-        <a>
-            <icon-walks></icon-walks>
-            <div> Minuta </div>
+        <a [routerLink]="['home']" routerLinkActive="active-link" (click)="toogleSidebar()">
+            <icon-home></icon-home>
+            <div> Hogar </div>
         </a>
 
         <a>
@@ -59,7 +62,7 @@
 
         <a [routerLink]="['walks']" routerLinkActive="active-link" (click)="toogleSidebar()">
             <icon-walks></icon-walks>
-            <div>  Paseos </div>
+            <div> Paseos </div>
         </a>
 
         <a [routerLink]="['settings']" routerLinkActive="active-link" class="config" (click)="toogleSidebar()">

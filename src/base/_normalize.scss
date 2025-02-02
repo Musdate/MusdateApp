@@ -366,6 +366,16 @@ body {
     font-family: v.$font;
     font-size: 1.6rem;
     background-color: #E3E6E6;
+
+    app-home {
+      font-family: v.$homeFont;
+    }
+
+    app-menu-day,
+    app-menu-week,
+    app-menu-historial {
+      font-family: v.$menuFont;
+    }
 }
 
 p {

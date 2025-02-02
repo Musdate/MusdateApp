@@ -1,0 +1,48 @@
+<div class="header-row">
+
+    <div class="lampara-image-container">
+        <img src="../../../assets/acuarela-svg/lamparas-colgantes.png" alt="Lamparas colgantes" class="lampara-image">
+    </div>
+
+    <div class="header-welcome flex-center">
+        <div class="home-title"> BIENVENIDO </div>
+        <div class="home-subtitle"> RECETAS - MINUTA - COMPRAS </div>
+    </div>
+
+</div>
+
+<a [routerLink]="['recipes']" class="home-row-recipes flex-center">
+    <div class="icon-title">
+        <icon-click iconClass="home-click-icon"></icon-click>
+        <div class="home-title"> RECETAS </div>
+    </div>
+    <div class="home-subtitle"> CREA RECETAS, GUARDALAS Y COMPARTELAS </div>
+</a>
+
+<a [routerLink]="['menu']" class="home-row-menu-container">
+    <div class="home-row-menu">
+        <div class="icon-title">
+            <icon-click iconClass="home-click-icon"></icon-click>
+            <div class="home-title"> MINUTA </div>
+        </div>
+        <div class="home-subtitle"> PLANIFICA TUS COMIDAS SEMANALES </div>
+    </div>
+    <div class="maceta-image-container">
+        <img src="../../../assets/acuarela-svg/planta-maceta.png" alt="Planta en maceta" class="maceta-plant-image">
+    </div>
+</a>
+
+<a [routerLink]="['shopping-list']" class="home-row-shopping-container">
+    <div class="banco-image-container">
+        <img src="../../../assets/acuarela-svg/banco.png" alt="Banco" class="banco-image">
+    </div>
+    <div class="home-row-shopping">
+        <div class="icon-title">
+            <icon-click iconClass="home-click-icon"></icon-click>
+            <div class="home-title"> COMPRAS </div>
+        </div>
+        <div class="home-subtitle"> CREA LSITAS DE COMPRAS </div>
+    </div>
+</a>
+
+<router-outlet></router-outlet>
