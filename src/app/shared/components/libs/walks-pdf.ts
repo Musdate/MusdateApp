@@ -25,10 +25,8 @@ const generatePDF = ( pet: Pet, user: User | null ) => {
             { text: "Fecha", style: "tableHeader" },
             { text: "Estado", style: "tableHeader" },
         ],
-        ...pet.walks.map(( walk ) => [
-            walk.date,
-            walk.paid ? 'Pagado' : 'Pendiente'
-        ]),
+        ...pet.walks.filter(( walk ) => !walk.paid )
+                    .map(( walk ) => [ walk.date, 'Pendiente' ]),
     ];
 
     const totalPrice = pet.totalPrice;
@@ -131,19 +129,19 @@ const generatePDF = ( pet: Pet, user: User | null ) => {
         ],
     });
 
-    content.push({
-        columns: [
-            { text: "", width: "*" },
-            {
-                text: [
-                    { text: 'Total General: ', style: "total" },
-                    { text: currencyPipe.transform( totalPrice, 'USD' )}
-                ],
-                alignment: "right",
-                margin: [ 0, 10, 0, 10 ]
-            },
-        ],
-    });
+    // content.push({
+    //     columns: [
+    //         { text: "", width: "*" },
+    //         {
+    //             text: [
+    //                 { text: 'Total General: ', style: "total" },
+    //                 { text: currencyPipe.transform( totalPrice, 'USD' )}
+    //             ],
+    //             alignment: "right",
+    //             margin: [ 0, 10, 0, 10 ]
+    //         },
+    //     ],
+    // });
 
     const styles = {
         title: {
