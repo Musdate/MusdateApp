@@ -28,8 +28,6 @@ export class AppComponent {
         return;
 
       case AuthStatus.authenticated:
-        console.log(this.authService.authStatus());
-        this.router.navigateByUrl('/landing', { replaceUrl: true });
         return;
 
       case AuthStatus.notAuthenticated:
